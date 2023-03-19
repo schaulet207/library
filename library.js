@@ -55,12 +55,34 @@ displayLibrary();
 }
 
 function displayLibrary() {
-let ul = document.getElementById("library");
-ul.innerHTML = "";
+let grid = document.getElementById("library");
+grid.innerHTML = "";
 
 for(let i = 0; i < library.length; i++) {
-    let li = document.createElement("p");
-    li.appendChild(document.createTextNode(library[i].title + " by " + library[i].author + ", " + library[i].pages + " pages"));
-    ul.appendChild(li);
+    const card = document.createElement("div");
+    card.classList.add('card')
+    grid.appendChild(card);
+
+    const titleLabel = document.createElement("h1");
+    titleLabel.classList.add('label-header');
+    titleLabel.innerHTML = "TITLE:";
+    card.appendChild(titleLabel);
+    card.appendChild(document.createTextNode(library[i].title));
+
+    const authorLabel = document.createElement("h1");
+    authorLabel.classList.add('label-header');
+    authorLabel.innerHTML = "AUTHOR:";
+    card.appendChild(authorLabel);
+    card.appendChild(document.createTextNode(library[i].author));
+
+    const pagesLabel = document.createElement("h1");
+    pagesLabel.classList.add('label-header');
+    pagesLabel.innerHTML = "PAGES:";
+    card.appendChild(pagesLabel);
+    card.appendChild(document.createTextNode(library[i].pages));
+    // grid.appendChild(bookInfo);
+    // card.appendChild(document.createTextNode(library[i].pages));
+    
 }
+
 }

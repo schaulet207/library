@@ -117,13 +117,37 @@ a {
     cursor: pointer;
   }
 
-.library {
+/*Library grid styling */
+#library {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 4vw;
+    padding: 1vw;
 }
 
 ul {
     padding: 0;
+}
+
+/*Book card styling*/
+.card {
+    border: 1px solid black;
+    border-radius: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    height: 30vh;
+    width: 35vw;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 20px;
+}
+
+.label-header {
+    font-size: 1.5rem;
+    text-decoration: underline;
 }
