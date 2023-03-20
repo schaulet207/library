@@ -33,23 +33,26 @@ submitBtn.onclick = function(e) {
 // Initialize the myLibrary array
 let library = [];
       
-function Book(title, author, pages) {
+function Book(title, author, pages, read) {
 this.title = title;
 this.author = author;
 this.pages = pages;
+this.read = read;
 }
 
 function addBook() {
 let title = document.getElementById("title").value;
 let author = document.getElementById("author").value;
 let pages = document.getElementById("pages").value;
+let read = document.getElementById("read").value;
 
-let book = new Book(title, author, pages);
+let book = new Book(title, author, pages, read);
 library.push(book);
 
 document.getElementById("title").value = "";
 document.getElementById("author").value = "";
 document.getElementById("pages").value = "";
+document.getElementById("read").value = "off";
 
 displayLibrary();
 }
@@ -63,26 +66,23 @@ for(let i = 0; i < library.length; i++) {
     card.classList.add('card')
     grid.appendChild(card);
 
-    const titleLabel = document.createElement("h1");
-    titleLabel.classList.add('label-header');
-    titleLabel.innerHTML = "TITLE:";
-    card.appendChild(titleLabel);
+    const titleBreak = document.createElement("br");
+    card.appendChild(titleBreak);
     card.appendChild(document.createTextNode(library[i].title));
 
-    const authorLabel = document.createElement("h1");
-    authorLabel.classList.add('label-header');
-    authorLabel.innerHTML = "AUTHOR:";
-    card.appendChild(authorLabel);
-    card.appendChild(document.createTextNode(library[i].author));
+    const authorBreak = document.createElement("br");
+    card.appendChild(authorBreak);
+    card.appendChild(document.createTextNode("by " + library[i].author));
 
-    const pagesLabel = document.createElement("h1");
-    pagesLabel.classList.add('label-header');
-    pagesLabel.innerHTML = "PAGES:";
-    card.appendChild(pagesLabel);
-    card.appendChild(document.createTextNode(library[i].pages));
-    // grid.appendChild(bookInfo);
-    // card.appendChild(document.createTextNode(library[i].pages));
-    
+    const pagesBreak = document.createElement("br");
+    const pagesBreak2 = document.createElement("br");
+    card.appendChild(pagesBreak);
+    card.appendChild(pagesBreak2);
+    card.appendChild(document.createTextNode(library[i].pages + " pages"));
+
+    const readBreak = document.createElement("br");
+    card.appendChild(readBreak);
+    card.appendChild(document.createTextNode(library[i].read));    
 }
 }
 
@@ -143,6 +143,8 @@ function drop(e) {
 
     // display the draggable element
     draggable.classList.remove('hide');
+
+
 
     // restore box background-colors and borders to original values
     boxes.forEach(box => {
