@@ -84,5 +84,69 @@ for(let i = 0; i < library.length; i++) {
     // card.appendChild(document.createTextNode(library[i].pages));
     
 }
+}
 
+// KANBAN BOARD
+/* draggable element */
+const item = document.querySelector('.item');
+
+item.addEventListener('dragstart', dragStart);
+
+function dragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    setTimeout(() => {
+        e.target.classList.add('hide');
+    }, 0);
+}
+
+/* drop targets */
+const boxes = document.querySelectorAll('.box');
+
+boxes.forEach(box => {
+    box.addEventListener('dragenter', dragEnter)
+    box.addEventListener('dragover', dragOver);
+    box.addEventListener('dragleave', dragLeave);
+    box.addEventListener('drop', drop);
+});
+
+function dragEnter(e) {
+    e.preventDefault();
+    e.target.classList.add('drag-over');
+
+    // change box background-colors and borders to green
+    boxes.forEach(box => {
+        box.style.backgroundColor = "rgba(81, 141, 254, 0.2)";
+        box.style.border = "dashed 3px rgba(81, 141, 254)";
+    });
+}
+
+function dragOver(e) {
+    e.preventDefault();
+    e.target.classList.add('drag-over');
+    e.target.style.backgroundColor = "rgba(95, 185, 136, 0.3)";
+    e.target.style.border = "dashed 3px rgba(95, 185, 136)";
+}
+
+function dragLeave(e) {
+    e.target.classList.remove('drag-over');
+}
+
+function drop(e) {
+    e.target.classList.remove('drag-over');
+
+    // get the draggable element
+    const id = e.dataTransfer.getData('text/plain');
+    const draggable = document.getElementById(id);
+
+    // add it to the drop target
+    e.target.appendChild(draggable);
+
+    // display the draggable element
+    draggable.classList.remove('hide');
+
+    // restore box background-colors and borders to original values
+    boxes.forEach(box => {
+        box.style.backgroundColor = "white";
+        box.style.border = "solid 3px #ccc";
+    });
 }

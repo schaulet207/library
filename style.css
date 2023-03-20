@@ -151,3 +151,56 @@ ul {
     font-size: 1.5rem;
     text-decoration: underline;
 }
+
+/* Kanban Board set-up*/
+.swimLanes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.box {
+    height: 150px;
+    width: 150px;
+    border: solid 3px #ccc;
+    margin: 10px;
+    /* align items in the box */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.drag-over {
+    padding: 5px;
+    transition-duration: 0.3s;
+}
+
+.item {
+    height: 75px;
+    width: 75px;
+    background-color: #F0DB4F;
+    cursor: all-scroll;
+}
+
+.hide {
+    display: none;
+}
+
+.short {
+    display: flex;
+    flex-direction: row;
+}
+
+.medium {
+    display: flex;
+    flex-direction: row;
+}
+
+.long {
+    display: flex;
+    flex-direction: row;
+}
