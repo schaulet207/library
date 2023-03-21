@@ -193,14 +193,24 @@ ul {
 .card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    overflow: auto;
-    border: solid 3px #ccc;
     height: 12em;
     width: 14em;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    margin: 10px;
+}
+
+.inner {
+    height: 11em;
+    width: 13em;
+    border: solid 3px #ccc;
+    background-color: rgba(192, 203, 213);
+    cursor: all-scroll;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* overflow: auto; */
     font-size: 20px;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -239,9 +249,10 @@ ul {
 }
 
 .item {
-    height: 75px;
-    width: 75px;
-    background-color: #F0DB4F;
+    height: 11em;
+    width: 13em;
+    border: solid 3px #ccc;
+    background-color: rgba(192, 203, 213);
     cursor: all-scroll;
 }
 

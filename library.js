@@ -66,30 +66,35 @@ for(let i = 0; i < library.length; i++) {
     card.classList.add('card')
     grid.appendChild(card);
 
+    const innerCard = document.createElement("div");
+    innerCard.classList.add('inner');
+    innerCard.setAttribute("draggable", "true")
+    innerCard.addEventListener('dragstart', dragStart);
+    card.appendChild(innerCard);
+
     const titleBreak = document.createElement("br");
-    card.appendChild(titleBreak);
-    card.appendChild(document.createTextNode(library[i].title));
+    innerCard.appendChild(titleBreak);
+    innerCard.appendChild(document.createTextNode(library[i].title));
 
     const authorBreak = document.createElement("br");
-    card.appendChild(authorBreak);
-    card.appendChild(document.createTextNode("by " + library[i].author));
+    innerCard.appendChild(authorBreak);
+    innerCard.appendChild(document.createTextNode("by " + library[i].author));
 
     const pagesBreak = document.createElement("br");
     const pagesBreak2 = document.createElement("br");
-    card.appendChild(pagesBreak);
-    card.appendChild(pagesBreak2);
-    card.appendChild(document.createTextNode(library[i].pages + " pages"));
+    innerCard.appendChild(pagesBreak);
+    innerCard.appendChild(pagesBreak2);
+    innerCard.appendChild(document.createTextNode(library[i].pages + " pages"));
 
     const readBreak = document.createElement("br");
-    card.appendChild(readBreak);
-    card.appendChild(document.createTextNode(library[i].read));    
+    innerCard.appendChild(readBreak);
+    innerCard.appendChild(document.createTextNode(library[i].read));    
 }
 }
 
 // KANBAN BOARD
 /* draggable element */
 const item = document.querySelector('.item');
-
 item.addEventListener('dragstart', dragStart);
 
 function dragStart(e) {
