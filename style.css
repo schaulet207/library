@@ -103,11 +103,13 @@ p {
   .modal-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    font-family: 'Fira Sans', sans-serif;
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
+    line-height: 1rem;    
     border: 1px solid #888;
     width: 20em; /* Could be more or less, depending on screen size */
   }
@@ -116,27 +118,61 @@ p {
     position: relative;
     flex-direction: row;
     justify-items: center;
-    bottom: 15px;
+    bottom: 10px;
 }
 
 label {
-    font-size: 18px;
+    font-size: 1.2em;
     font-weight: bolder;
+    text-decoration: underline;
+    font-family: 'Roboto', sans-serif;
 }
 
 #submitBtn {
-    height: 2rem;
+    height: 3rem;
     width: 15rem;
     margin-top: 15px;
+    background-color: rgba(104, 155, 248);
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 #submitBtn:hover {
     cursor: pointer;
 }
 
+form h1 {
+    position: relative;
+    bottom: .5em;
+    font-weight: bolder;
+    font-size: 2em;
+    font-family: 'Roboto', sans-serif;
+}
+
 input {
-    height: 2rem;
+    height: 3rem;
     width: 15rem;
+    font-weight: bold;
+    border-radius: 8px;
+    border-width: 2.5px;
+    font-size: 1.5em;
+}
+
+.invalid::placeholder {
+    color: red;
+}
+
+.invalid {
+    border-color: red;
+}
+
+.valid::placeholder {
+    color: green;
+}
+
+.valid {
+    border-color: green;
 }
 
 input#read {
@@ -161,7 +197,6 @@ form {
 .close {
     position: relative;
     left: 5.5em;
-    bottom: .5em;
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -221,6 +256,7 @@ ul {
 
 .inner h2 {
     font-size: 1em;
+    text-decoration: underline;
 }
 
 .inner h3 {

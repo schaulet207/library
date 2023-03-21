@@ -26,10 +26,32 @@ window.onclick = function(event) {
   }
 }
 
-// When the user clicks the "Add Book" button, close the modal and add book information to library
+
+
+// When submit is clicked, execute form validations + close the modal and add book information to library
 submitBtn.onclick = function(e) {
-  modal.style.display = "none";
-  addBook();
+  if (!title.value) {
+    title.classList.add("invalid");
+  } else {
+    title.classList.remove('invalid');
+  }
+
+  if (!author.value) {
+    author.classList.add("invalid");
+  } else {
+    author.classList.remove('invalid');
+  }
+
+  if (!pages.value) {
+    pages.classList.add("invalid");
+  } else {
+    pages.classList.remove('invalid');
+  }
+
+  if (title.value && author.value && pages.value) {
+    modal.style.display = "none";
+    addBook();
+  }
 }
 
 // Library and book logic
@@ -80,6 +102,8 @@ function displayLibrary() {
   authorField.innerText = "by " + library[bookID].author;
   const pagesField = card.appendChild(document.createElement("h4"));
   pagesField.innerText = library[bookID].pages + " pages";
+  // const readField = card.appendChild(document.createElement("h4"));
+  // pagesField.innerText = library[bookID].pages + " pages";
   
   // const readField = innerCard.createElement("h2");
 
