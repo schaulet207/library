@@ -11,6 +11,7 @@ var bookID = -1;
 
 // When the user clicks on the + Add button, open the modal
 btn.onclick = function() {
+  document.getElementById("read").checked = false;
   modal.style.display = "block";
 }
 
@@ -77,11 +78,11 @@ library.push(book);
 document.getElementById("title").value = "";
 document.getElementById("author").value = "";
 document.getElementById("pages").value = "";
-document.getElementById("read").value = "off";
 displayLibrary();
 }
 
 function displayLibrary() {
+  console.log(library);
   bookID++;
   let grid = document.getElementById("library");
 
@@ -102,6 +103,16 @@ function displayLibrary() {
   authorField.innerText = "by " + library[bookID].author;
   const pagesField = card.appendChild(document.createElement("h4"));
   pagesField.innerText = library[bookID].pages + " pages";
+  const readToggle = card.appendChild(document.createElement("button"));
+  readToggle.classList.add('readButton');
+  if (read.checked === true) {
+    readToggle.classList.add('isRead');
+    readToggle.innerHTML=("Read");
+  } else {
+    readToggle.classList.add('notRead');
+    readToggle.innerHTML=("Not Read");
+  }
+  
   // const readField = card.appendChild(document.createElement("h4"));
   // pagesField.innerText = library[bookID].pages + " pages";
   

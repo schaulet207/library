@@ -271,6 +271,24 @@ ul {
     text-decoration: underline;
 }
 
+.readButton {
+    height: 2.5rem;
+    width: 10rem;
+    margin-top: 15px;
+    background-color: rgba(104, 155, 248);
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.isRead {
+    background-color: green;
+}
+
+.notRead {
+    background-color: red;
+}
+
 /* Kanban Board set-up*/
 .swimLanes {
     display: flex;
