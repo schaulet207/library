@@ -190,31 +190,45 @@ ul {
 }
 
 /*Book card styling*/
-.card {
+.frame {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 12em;
-    width: 14em;
+    height: 12rem;
+    width: 14rem;
     margin: 10px;
 }
 
 .inner {
-    height: 11em;
-    width: 13em;
+    min-height: 11em;
+    min-width: 13em;
+    max-height: 11em;
+    max-width: 13em;
     border: solid 3px #ccc;
     background-color: rgba(192, 203, 213);
     cursor: all-scroll;
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
+    line-height: 0;
     align-items: center;
     /* overflow: auto; */
     font-size: 20px;
     font-weight: bold;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Fira Sans', sans-serif;
 }
+
+.inner h2 {
+    font-size: 1em;
+}
+
+.inner h3 {
+    font-size: 1em;
+    font-style: italic;
+}
+
+
 
 .label-header {
     font-size: 1.5rem;

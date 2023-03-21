@@ -5,6 +5,9 @@ const span = document.getElementsByClassName("close")[0]; // Get the <span> elem
 const form = document.querySelector("form"); // Get the form
 const submitBtn = document.getElementById("submitBtn");
 
+// create bookID variable
+var bookID = -1;
+
 
 // When the user clicks on the + Add button, open the modal
 btn.onclick = function() {
@@ -53,43 +56,70 @@ document.getElementById("title").value = "";
 document.getElementById("author").value = "";
 document.getElementById("pages").value = "";
 document.getElementById("read").value = "off";
-
 displayLibrary();
 }
 
 function displayLibrary() {
-let grid = document.getElementById("library");
-grid.innerHTML = "";
+  bookID++;
+  let grid = document.getElementById("library");
 
-for(let i = 0; i < library.length; i++) {
-    const card = document.createElement("div");
-    card.classList.add('card')
-    grid.appendChild(card);
+  const frame = document.createElement("div");
+  frame.classList.add('frame')
+  grid.appendChild(frame);
 
-    const innerCard = document.createElement("div");
-    innerCard.classList.add('inner');
-    innerCard.setAttribute("draggable", "true")
-    innerCard.addEventListener('dragstart', dragStart);
-    card.appendChild(innerCard);
+  const card = document.createElement("div");
+  card.classList.add('inner');
+  card.setAttribute("draggable", "true")
+  card.addEventListener('dragstart', dragStart);
+  card.id = bookID;
+  frame.appendChild(card);
 
-    const titleBreak = document.createElement("br");
-    innerCard.appendChild(titleBreak);
-    innerCard.appendChild(document.createTextNode(library[i].title));
+  const titleField = card.appendChild(document.createElement("h2"));
+  titleField.innerText = library[bookID].title;
+  const authorField = card.appendChild(document.createElement("h3"));
+  authorField.innerText = "by " + library[bookID].author;
+  const pagesField = card.appendChild(document.createElement("h4"));
+  pagesField.innerText = library[bookID].pages + " pages";
+  
+  // const readField = innerCard.createElement("h2");
 
-    const authorBreak = document.createElement("br");
-    innerCard.appendChild(authorBreak);
-    innerCard.appendChild(document.createTextNode("by " + library[i].author));
+  // innerCard.appendChild(document.createTextNode(library[i].title));
+  // innerCard.appendChild(document.createTextNode("by " + library[i].author));
+  // innerCard.appendChild(document.createTextNode(library[i].pages + " pages"));
+  // innerCard.appendChild(document.createTextNode(library[i].read));
+  // innerCard.appendChild(document.createTextNode(bookID));
 
-    const pagesBreak = document.createElement("br");
-    const pagesBreak2 = document.createElement("br");
-    innerCard.appendChild(pagesBreak);
-    innerCard.appendChild(pagesBreak2);
-    innerCard.appendChild(document.createTextNode(library[i].pages + " pages"));
 
-    const readBreak = document.createElement("br");
-    innerCard.appendChild(readBreak);
-    innerCard.appendChild(document.createTextNode(library[i].read));    
-}
+// for(let i = 0; i < library.length; i++) {
+//     const card = document.createElement("div");
+//     card.classList.add('card')
+//     grid.appendChild(card);
+
+//     const innerCard = document.createElement("div");
+//     innerCard.classList.add('inner');
+//     innerCard.setAttribute("draggable", "true")
+//     innerCard.addEventListener('dragstart', dragStart);
+//     card.appendChild(innerCard);
+
+//     const titleBreak = document.createElement("br");
+//     innerCard.appendChild(titleBreak);
+//     innerCard.appendChild(document.createTextNode(library[i].title));
+
+//     const authorBreak = document.createElement("br");
+//     innerCard.appendChild(authorBreak);
+//     innerCard.appendChild(document.createTextNode("by " + library[i].author));
+
+//     const pagesBreak = document.createElement("br");
+//     const pagesBreak2 = document.createElement("br");
+//     innerCard.appendChild(pagesBreak);
+//     innerCard.appendChild(pagesBreak2);
+//     innerCard.appendChild(document.createTextNode(library[i].pages + " pages"));
+
+//     const readBreak = document.createElement("br");
+//     innerCard.appendChild(readBreak);
+//     innerCard.appendChild(document.createTextNode(library[i].read));
+//     bookID++;
+// }  
 }
 
 // KANBAN BOARD
@@ -140,7 +170,7 @@ function drop(e) {
     e.target.classList.remove('drag-over');
 
     // get the draggable element
-    const id = e.dataTransfer.getData('text/plain');
+    const id = e.dataTransfer.getData('text');
     const draggable = document.getElementById(id);
 
     // add it to the drop target
@@ -148,8 +178,6 @@ function drop(e) {
 
     // display the draggable element
     draggable.classList.remove('hide');
-
-
 
     // restore box background-colors and borders to original values
     boxes.forEach(box => {
