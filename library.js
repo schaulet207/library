@@ -59,20 +59,23 @@ submitBtn.onclick = function(e) {
 // Initialize the myLibrary array
 let library = [];
       
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, id) {
 this.title = title;
 this.author = author;
 this.pages = pages;
 this.read = read;
+this.id = bookID;
 }
 
 function addBook() {
+bookID++;
 let title = document.getElementById("title").value;
 let author = document.getElementById("author").value;
 let pages = document.getElementById("pages").value;
 let read = document.getElementById("read").value;
+let id = bookID;
 
-let book = new Book(title, author, pages, read);
+let book = new Book(title, author, pages, read, id);
 library.push(book);
 
 document.getElementById("title").value = "";
@@ -83,7 +86,6 @@ displayLibrary();
 
 function displayLibrary() {
   console.log(library);
-  bookID++;
   let grid = document.getElementById("library");
 
   const frame = document.createElement("div");
@@ -105,6 +107,7 @@ function displayLibrary() {
   pagesField.innerText = library[bookID].pages + " pages";
   const readToggle = card.appendChild(document.createElement("button"));
   readToggle.classList.add('readButton');
+  readToggle.id = "button" + bookID;
   if (read.checked === true) {
     readToggle.classList.add('isRead');
     readToggle.innerHTML=("Read");
@@ -112,49 +115,19 @@ function displayLibrary() {
     readToggle.classList.add('notRead');
     readToggle.innerHTML=("Not Read");
   }
-  
-  // const readField = card.appendChild(document.createElement("h4"));
-  // pagesField.innerText = library[bookID].pages + " pages";
-  
-  // const readField = innerCard.createElement("h2");
-
-  // innerCard.appendChild(document.createTextNode(library[i].title));
-  // innerCard.appendChild(document.createTextNode("by " + library[i].author));
-  // innerCard.appendChild(document.createTextNode(library[i].pages + " pages"));
-  // innerCard.appendChild(document.createTextNode(library[i].read));
-  // innerCard.appendChild(document.createTextNode(bookID));
-
-
-// for(let i = 0; i < library.length; i++) {
-//     const card = document.createElement("div");
-//     card.classList.add('card')
-//     grid.appendChild(card);
-
-//     const innerCard = document.createElement("div");
-//     innerCard.classList.add('inner');
-//     innerCard.setAttribute("draggable", "true")
-//     innerCard.addEventListener('dragstart', dragStart);
-//     card.appendChild(innerCard);
-
-//     const titleBreak = document.createElement("br");
-//     innerCard.appendChild(titleBreak);
-//     innerCard.appendChild(document.createTextNode(library[i].title));
-
-//     const authorBreak = document.createElement("br");
-//     innerCard.appendChild(authorBreak);
-//     innerCard.appendChild(document.createTextNode("by " + library[i].author));
-
-//     const pagesBreak = document.createElement("br");
-//     const pagesBreak2 = document.createElement("br");
-//     innerCard.appendChild(pagesBreak);
-//     innerCard.appendChild(pagesBreak2);
-//     innerCard.appendChild(document.createTextNode(library[i].pages + " pages"));
-
-//     const readBreak = document.createElement("br");
-//     innerCard.appendChild(readBreak);
-//     innerCard.appendChild(document.createTextNode(library[i].read));
-//     bookID++;
-// }  
+  // Toggle between 'Read' and 'Not read' when clicking readToggle button
+  readToggle.addEventListener("click", function() {
+    if (readToggle.className === "readButton isRead") {
+      readToggle.classList.remove('isRead');
+      readToggle.classList.add('notRead');
+      readToggle.innerHTML=("Not Read");
+    }
+    else {
+      readToggle.classList.remove('notRead');
+      readToggle.classList.add('isRead');
+      readToggle.innerHTML=("Read");
+    }
+  });
 }
 
 // KANBAN BOARD

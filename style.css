@@ -281,6 +281,10 @@ ul {
     font-weight: bold;
 }
 
+.readButton:hover {
+    cursor: pointer;
+}
+
 .isRead {
     background-color: green;
 }
