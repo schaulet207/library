@@ -8,7 +8,6 @@ const submitBtn = document.getElementById("submitBtn");
 // create bookID variable
 var bookID = -1;
 
-
 // When the user clicks on the + Add button, open the modal
 btn.onclick = function() {
   document.getElementById("read").checked = false;
@@ -26,8 +25,6 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
-
 
 // When submit is clicked, execute form validations + close the modal and add book information to library
 submitBtn.onclick = function(e) {
@@ -59,12 +56,13 @@ submitBtn.onclick = function(e) {
 // Initialize the myLibrary array
 let library = [];
       
-function Book(title, author, pages, read, id) {
+function Book(title, author, pages, read, id, deleted) {
 this.title = title;
 this.author = author;
 this.pages = pages;
 this.read = read;
 this.id = bookID;
+this.deleted = deleted;
 }
 
 function addBook() {
@@ -73,9 +71,10 @@ let title = document.getElementById("title").value;
 let author = document.getElementById("author").value;
 let pages = document.getElementById("pages").value;
 let read = document.getElementById("read").value;
+let deleted = false;
 let id = bookID;
 
-let book = new Book(title, author, pages, read, id);
+let book = new Book(title, author, pages, read, id, deleted);
 library.push(book);
 
 document.getElementById("title").value = "";
@@ -105,8 +104,13 @@ function displayLibrary() {
   const pagesField = card.appendChild(document.createElement("h4"));
   pagesField.innerText = library[bookID].pages + " pages";
   const readToggle = card.appendChild(document.createElement("button"));
-  readToggle.classList.add('readButton');
+  readToggle.classList.add('cardButton');
   readToggle.id = bookID;
+  const deleteButton = card.appendChild(document.createElement("button"));
+  deleteButton.classList.add('cardButton');
+  deleteButton.innerHTML=("Delete");
+  deleteButton.style.backgroundColor=("red");  
+  deleteButton.id = bookID;
   if (read.checked === true) {
     readToggle.classList.add('isRead');
     readToggle.innerHTML=("Read");
@@ -118,7 +122,7 @@ function displayLibrary() {
   readToggle.addEventListener("click", function() {
     let x = this.id;
 
-    if (readToggle.className === "readButton isRead") {
+    if (readToggle.className === "cardButton isRead") {
       readToggle.classList.remove('isRead');
       readToggle.classList.add('notRead');
       readToggle.innerHTML=("Not Read");
@@ -131,6 +135,15 @@ function displayLibrary() {
       library[x].read = 'on';
     }
   });
+
+// If delete button is clicked - remove card entirely
+deleteButton.addEventListener("click", function() {
+  let x = this.id;
+
+  grid.removeChild(frame);
+  library[x].deleted = true;
+  console.log(library);
+});
 }
 
 // KANBAN BOARD

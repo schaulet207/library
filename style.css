@@ -264,14 +264,12 @@ ul {
     font-style: italic;
 }
 
-
-
 .label-header {
     font-size: 1.5rem;
     text-decoration: underline;
 }
 
-.readButton {
+.cardButton {
     height: 2.5rem;
     width: 10rem;
     margin-top: 15px;
@@ -281,7 +279,7 @@ ul {
     font-weight: bold;
 }
 
-.readButton:hover {
+.cardButton:hover {
     cursor: pointer;
 }
 
