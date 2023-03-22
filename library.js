@@ -85,7 +85,6 @@ displayLibrary();
 }
 
 function displayLibrary() {
-  console.log(library);
   let grid = document.getElementById("library");
 
   const frame = document.createElement("div");
@@ -107,7 +106,7 @@ function displayLibrary() {
   pagesField.innerText = library[bookID].pages + " pages";
   const readToggle = card.appendChild(document.createElement("button"));
   readToggle.classList.add('readButton');
-  readToggle.id = "button" + bookID;
+  readToggle.id = bookID;
   if (read.checked === true) {
     readToggle.classList.add('isRead');
     readToggle.innerHTML=("Read");
@@ -117,15 +116,19 @@ function displayLibrary() {
   }
   // Toggle between 'Read' and 'Not read' when clicking readToggle button
   readToggle.addEventListener("click", function() {
+    let x = this.id;
+
     if (readToggle.className === "readButton isRead") {
       readToggle.classList.remove('isRead');
       readToggle.classList.add('notRead');
       readToggle.innerHTML=("Not Read");
+      library[x].read = 'off';
     }
     else {
       readToggle.classList.remove('notRead');
       readToggle.classList.add('isRead');
       readToggle.innerHTML=("Read");
+      library[x].read = 'on';
     }
   });
 }
