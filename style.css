@@ -235,9 +235,9 @@ ul {
 }
 
 .inner {
-    min-height: 11em;
+    min-height: 12em;
     min-width: 13em;
-    max-height: 11em;
+    max-height: 12em;
     max-width: 13em;
     border: solid 3px #ccc;
     background-color: rgba(192, 203, 213);
@@ -246,10 +246,10 @@ ul {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    line-height: 0;
     align-items: center;
     /* overflow: auto; */
     font-size: 20px;
+    line-height: 0;
     font-weight: bold;
     font-family: 'Fira Sans', sans-serif;
 }
@@ -301,8 +301,10 @@ ul {
 }
 
 .box {
-    height: 12em;
-    width: 14em;
+    min-height: 16em;
+    min-width: 18em;
+    max-height: 18em;
+    max-width: 18em;
     border: solid 3px #ccc;
     margin: 10px;
     /* align items in the box */
@@ -310,12 +312,17 @@ ul {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    border: 3px solid rgb(204, 204, 204);
 }
 
-
 .drag-over {
-    padding: 5px;
+    padding: 10px;
     transition-duration: 0.3s;
+}
+
+.unDragged {
+    padding: 0px;
 }
 
 .item {
@@ -324,6 +331,11 @@ ul {
     border: solid 3px #ccc;
     background-color: rgba(192, 203, 213);
     cursor: all-scroll;
+}
+
+.drag-block {
+    background-color: rgba(234, 51, 35, 0.5);
+    border: dashed 3px rgba(234, 51, 35);
 }
 
 .hide {

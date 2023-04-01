@@ -140,7 +140,9 @@ function displayLibrary() {
 deleteButton.addEventListener("click", function() {
   let x = this.id;
 
-  grid.removeChild(frame);
+  // Targets the parent box of the button being clicked and removes any content
+  deleteButton.closest(".box").innerHTML = null;
+  frame.innerHTML = null;
   library[x].deleted = true;
   console.log(library);
 });
@@ -180,19 +182,57 @@ function dragEnter(e) {
 }
 
 function dragOver(e) {
+    // Remove any temporary characteristics
     e.preventDefault();
+    e.target.classList.remove('unDragged');
     e.target.classList.add('drag-over');
+
+    // If trying to drop on the content within a box -> turn content red, change cursor to 'not-allowed' and prevent from dropping
+    if ((e.target.parentElement.className === "box unDragged") || (e.target.parentElement.className === "box")) {
+      e.target.classList.add('drag-block');
+      console.log("ONE");
+      
+  }
+  // If trying to drop on the box with content within -> turn content red, change cursor to 'not-allowed' and prevent from dropping
+    else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
+      e.target.firstElementChild.classList.add('drag-block');
+      console.log("TWO");
+    }
+
+    // If trying to drop on an empty box after trying to drop on a box with content -> restore normal styling, 
+    // change cursor to 'draggable' and allow dropping
+    else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
+      e.target.firstElementChild.classList.add('drag-block');
+      console.log("TWO");
+    }
+
+  else {
     e.target.style.backgroundColor = "rgba(95, 185, 136, 0.3)";
     e.target.style.border = "dashed 3px rgba(95, 185, 136)";
+    e.target.classList.remove('drag-block');
+    console.log("THREE");
+  }
 }
 
 function dragLeave(e) {
     e.target.classList.remove('drag-over');
+    e.target.classList.remove('drag-block');
+    e.target.classList.add('unDragged');
+    e.target.style.transition = "0.1s";
+    console.log("FOUR");
+    if ((e.target.children.length > 0) && (e.target.firstElementChild.classList.contains('drag-block'))) {
+      e.target.firstElementChild.classList.remove('drag-block');
+      console.log("FIVE");
+    }
+    else {
+      return;
+      console.log("SIX");
+    }
 }
 
 function drop(e) {
     e.target.classList.remove('drag-over');
-
+    console.log("SEVEN");
     // get the draggable element
     const id = e.dataTransfer.getData('text');
     const draggable = document.getElementById(id);
@@ -202,6 +242,7 @@ function drop(e) {
 
     // display the draggable element
     draggable.classList.remove('hide');
+    e.target.firstElementChild.classList.remove('drag-block');
 
     // restore box background-colors and borders to original values
     boxes.forEach(box => {
