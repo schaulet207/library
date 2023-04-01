@@ -28,6 +28,8 @@ window.onclick = function(event) {
 
 // When submit is clicked, execute form validations + close the modal and add book information to library
 submitBtn.onclick = function(e) {
+
+  // Form validations
   if (!title.value) {
     title.classList.add("invalid");
   } else {
@@ -56,6 +58,7 @@ submitBtn.onclick = function(e) {
 // Initialize the myLibrary array
 let library = [];
       
+// Book constructor
 function Book(title, author, pages, read, id, deleted) {
 this.title = title;
 this.author = author;
@@ -65,6 +68,7 @@ this.id = bookID;
 this.deleted = deleted;
 }
 
+// Create a book object
 function addBook() {
 bookID++;
 let title = document.getElementById("title").value;
@@ -74,15 +78,18 @@ let read = document.getElementById("read").value;
 let deleted = false;
 let id = bookID;
 
+// Push new book to the library
 let book = new Book(title, author, pages, read, id, deleted);
 library.push(book);
 
+// Clear any content from previous displayed card before displaying new card
 document.getElementById("title").value = "";
 document.getElementById("author").value = "";
 document.getElementById("pages").value = "";
 displayLibrary();
 }
 
+// Display content from the new book object in the parking lot section
 function displayLibrary() {
   let grid = document.getElementById("library");
 
@@ -141,8 +148,13 @@ deleteButton.addEventListener("click", function() {
   let x = this.id;
 
   // Targets the parent box of the button being clicked and removes any content
-  deleteButton.closest(".box").innerHTML = null;
-  frame.innerHTML = null;
+  if (deleteButton.parentElement.classList.contains('frame')) {
+    deleteButton.closest(".frame").remove();
+  }
+  else if (deleteButton.parentElement.classList.contains('inner')) {
+    deleteButton.closest(".inner").remove();
+  }
+
   library[x].deleted = true;
   console.log(library);
 });
@@ -232,14 +244,14 @@ function dragLeave(e) {
 
 function drop(e) {
     e.target.classList.remove('drag-over');
-    console.log("SEVEN");
+
     // get the draggable element
     const id = e.dataTransfer.getData('text');
     const draggable = document.getElementById(id);
 
     // add it to the drop target
     e.target.appendChild(draggable);
-
+    console.log("SEVEN");
     // display the draggable element
     draggable.classList.remove('hide');
     e.target.firstElementChild.classList.remove('drag-block');

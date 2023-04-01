@@ -247,14 +247,17 @@ ul {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    /* overflow: auto; */
     font-size: 20px;
     line-height: 0;
     font-weight: bold;
     font-family: 'Fira Sans', sans-serif;
+    /* Fix overflow options later */
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .inner h2 {
+    max-width: 13em;
     font-size: 1em;
     text-decoration: underline;
 }
@@ -340,6 +343,11 @@ ul {
 
 .hide {
     display: none;
+}
+
+.parkingLot {
+    display: flex;
+    flex-direction: row;
 }
 
 .short {
