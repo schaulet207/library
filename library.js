@@ -93,26 +93,12 @@ displayLibrary();
 function displayLibrary() {
   let staging = document.getElementById("staging");
 
-  // THIS SECTION NO LONGER NEEDED w/ PARKING LOT
-    // const frame = document.createElement("div");
-    // frame.classList.add('frame')
-    // staging.appendChild(frame);
-
+// Create card with content submitted from modal
   const card = document.createElement("div");
   card.classList.add('inner');
   card.setAttribute("draggable", "true")
   card.addEventListener('dragstart', dragStart);
   card.id = bookID;
-
-for (i = 0; i < staging.children.length; i++) {
-  if (staging.children[i].children.length == 0) {
-    staging.children[i].appendChild(card);
-  }
-  else if (staging.children[i].children.length != 0) {
-    return
-  }
-}
-
   const titleField = card.appendChild(document.createElement("h2"));
   titleField.innerText = library[bookID].title;
   const authorField = card.appendChild(document.createElement("h3"));
@@ -133,7 +119,27 @@ for (i = 0; i < staging.children.length; i++) {
   } else {
     readToggle.classList.add('notRead');
     readToggle.innerHTML=("Not Read");
+    }
+
+// For loop determines which staging box is empty, then places the card there with appendChild 
+for (i = 0, fullCount = 1; i < staging.children.length; i++) {
+  if (staging.children[i].children.length == 0) {
+    staging.children[i].appendChild(card);
   }
+  else if (staging.children[i].children.length != 0) {
+    fullCount++;
+  }
+}
+
+// Checks whether the staging area is full. If yes --> add additional row of staging
+if (fullCount == staging.children.length) {
+  // ADD CODE HERE TO CREATE ADDITIONAL ROW OF STAGING BOX
+
+
+}
+
+
+
   // Toggle between 'Read' and 'Not read' when clicking readToggle button
   readToggle.addEventListener("click", function() {
     let x = this.id;
