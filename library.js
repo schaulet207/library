@@ -91,18 +91,19 @@ displayLibrary();
 
 // Display content from the new book object in the parking lot section
 function displayLibrary() {
-  let grid = document.getElementById("library");
+  let staging = document.getElementById("pl1");
 
-  const frame = document.createElement("div");
-  frame.classList.add('frame')
-  grid.appendChild(frame);
+  // THIS SECTION NO LONGER NEEDED w/ PARKING LOT
+    // const frame = document.createElement("div");
+    // frame.classList.add('frame')
+    // staging.appendChild(frame);
 
   const card = document.createElement("div");
   card.classList.add('inner');
   card.setAttribute("draggable", "true")
   card.addEventListener('dragstart', dragStart);
   card.id = bookID;
-  frame.appendChild(card);
+  staging.appendChild(card);
 
   const titleField = card.appendChild(document.createElement("h2"));
   titleField.innerText = library[bookID].title;
@@ -160,11 +161,18 @@ deleteButton.addEventListener("click", function() {
 });
 }
 
-// KANBAN BOARD
-/* draggable element */
-const item = document.querySelector('.item');
-item.addEventListener('dragstart', dragStart);
 
+/* Draggable element functionality for 'item'
+
+-- USE FOR KANBAN FUNCTIONALITY TESTING -- 
+
+Need to include the following 'item' div within a 'box' div for testing
+      <div class="item" id="item" draggable="true"></div> */ 
+
+// const item = document.querySelector('.item');
+// item.addEventListener('dragstart', dragStart);
+
+// KANBAN BOARD
 function dragStart(e) {
     e.dataTransfer.setData('text/plain', e.target.id);
     setTimeout(() => {
@@ -199,30 +207,27 @@ function dragOver(e) {
     e.target.classList.remove('unDragged');
     e.target.classList.add('drag-over');
 
-    // If trying to drop on the content within a box -> turn content red, change cursor to 'not-allowed' and prevent from dropping
+    // If dragging onto content within a box -> turn content red, change cursor to 'not-allowed' and prevent from dropping
     if ((e.target.parentElement.className === "box unDragged") || (e.target.parentElement.className === "box")) {
       e.target.classList.add('drag-block');
-      console.log("ONE");
       
   }
-  // If trying to drop on the box with content within -> turn content red, change cursor to 'not-allowed' and prevent from dropping
+  // If dragging onto a box with content within -> turn content red, change cursor to 'not-allowed' and prevent from dropping
     else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
       e.target.firstElementChild.classList.add('drag-block');
-      console.log("TWO");
     }
 
-    // If trying to drop on an empty box after trying to drop on a box with content -> restore normal styling, 
-    // change cursor to 'draggable' and allow dropping
+    // If dragging onto an empty box after trying to drop on a box with content -> restore normal styling, 
+      // change cursor to 'draggable' and allow dropping
     else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
       e.target.firstElementChild.classList.add('drag-block');
-      console.log("TWO");
     }
 
-  else {
+    // If dragging an item over an available box, higlight green
+  else if ((e.target.classList.contains('box')) && (e.target.children.length == 0)){
     e.target.style.backgroundColor = "rgba(95, 185, 136, 0.3)";
     e.target.style.border = "dashed 3px rgba(95, 185, 136)";
     e.target.classList.remove('drag-block');
-    console.log("THREE");
   }
 }
 
@@ -231,14 +236,11 @@ function dragLeave(e) {
     e.target.classList.remove('drag-block');
     e.target.classList.add('unDragged');
     e.target.style.transition = "0.1s";
-    console.log("FOUR");
     if ((e.target.children.length > 0) && (e.target.firstElementChild.classList.contains('drag-block'))) {
       e.target.firstElementChild.classList.remove('drag-block');
-      console.log("FIVE");
     }
     else {
       return;
-      console.log("SIX");
     }
 }
 
