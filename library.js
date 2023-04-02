@@ -91,7 +91,7 @@ displayLibrary();
 
 // Display content from the new book object in the parking lot section
 function displayLibrary() {
-  let staging = document.getElementById("pl1");
+  let staging = document.getElementById("staging");
 
   // THIS SECTION NO LONGER NEEDED w/ PARKING LOT
     // const frame = document.createElement("div");
@@ -103,7 +103,15 @@ function displayLibrary() {
   card.setAttribute("draggable", "true")
   card.addEventListener('dragstart', dragStart);
   card.id = bookID;
-  staging.appendChild(card);
+
+for (i = 0; i < staging.children.length; i++) {
+  if (staging.children[i].children.length == 0) {
+    staging.children[i].appendChild(card);
+  }
+  else if (staging.children[i].children.length != 0) {
+    return
+  }
+}
 
   const titleField = card.appendChild(document.createElement("h2"));
   titleField.innerText = library[bookID].title;
