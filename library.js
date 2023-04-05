@@ -115,19 +115,15 @@ function displayLibrary() {
   if (read.checked === true) {
     readToggle.classList.add('isRead');
     readToggle.innerHTML=("Read");
-    console.log("11")
   } else {
     readToggle.classList.add('notRead');
     readToggle.innerHTML=("Not Read");
-    console.log("22")
     }
 
 // For loop determines which staging box is empty, then places the card there with appendChild 
 for (i = 0, fullCount = 1; i < staging.children.length; i++) {
   if (staging.children[i].children.length == 0) {
     staging.children[i].appendChild(card);
-    console.log(staging.children[i]);
-    console.log(staging.children.length);
     break;
   }
   else if (staging.children[i].children.length != 0) {
@@ -144,9 +140,11 @@ for (i = 0, fullCount = 1; i < staging.children.length; i++) {
     // rows.classList.add("unDragged");
     rows.setAttribute("id", "pl" + ([j + 6]));
     staging.appendChild(rows);
-    
-    var boxes = document.querySelectorAll('.box');
-
+    rows.addEventListener('dragenter', dragEnter)
+    rows.addEventListener('dragover', dragOver);
+    rows.addEventListener('dragleave', dragLeave);
+    rows.addEventListener('drop', drop);
+    boxes = document.querySelectorAll('.box');
     }
   }
 }
@@ -160,14 +158,12 @@ for (i = 0, fullCount = 1; i < staging.children.length; i++) {
       readToggle.classList.add('notRead');
       readToggle.innerHTML=("Not Read");
       library[x].read = 'off';
-      console.log("111")
     }
     else {
       readToggle.classList.remove('notRead');
       readToggle.classList.add('isRead');
       readToggle.innerHTML=("Read");
       library[x].read = 'on';
-      console.log("222")
     }
   });
 
@@ -207,7 +203,7 @@ function dragStart(e) {
 }
 
 /* drop targets */
-const boxes = document.querySelectorAll('.box');
+let boxes = document.querySelectorAll('.box');
 
 boxes.forEach(box => {
     box.addEventListener('dragenter', dragEnter)
@@ -225,7 +221,6 @@ function dragEnter(e) {
         box.style.backgroundColor = "rgba(81, 141, 254, 0.2)";
         box.style.border = "dashed 3px rgba(81, 141, 254)";
     });
-    console.log("1");
 }
 
 function dragOver(e) {
@@ -237,20 +232,17 @@ function dragOver(e) {
     // If dragging onto content within a box -> turn content red, change cursor to 'not-allowed' and prevent from dropping
     if ((e.target.parentElement.className === "box unDragged") || (e.target.parentElement.className === "box")) {
       e.target.classList.add('drag-block');
-      console.log("2");
       
   }
   // If dragging onto a box with content within -> turn content red, change cursor to 'not-allowed' and prevent from dropping
     else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
       e.target.firstElementChild.classList.add('drag-block');
-      console.log("3");
     }
 
     // If dragging onto an empty box after trying to drop on a box with content -> restore normal styling, 
       // change cursor to 'draggable' and allow dropping
     else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
       e.target.firstElementChild.classList.add('drag-block');
-      console.log("4");
     }
 
     // If dragging an item over an available box, highlight green
@@ -258,7 +250,6 @@ function dragOver(e) {
     e.target.style.backgroundColor = "rgba(95, 185, 136, 0.3)";
     e.target.style.border = "dashed 3px rgba(95, 185, 136)";
     e.target.classList.remove('drag-block');
-    console.log("5");
   }
 }
 
@@ -269,9 +260,8 @@ function dragLeave(e) {
     e.target.style.transition = "0.1s";
     if ((e.target.children.length > 0) && (e.target.firstElementChild.classList.contains('drag-block'))) {
       e.target.firstElementChild.classList.remove('drag-block');
-      console.log("6");
     }
-    else {console.log("7");
+    else {
       return;
     }
 }
@@ -293,6 +283,5 @@ function drop(e) {
     boxes.forEach(box => {
         box.style.backgroundColor = "transparent";
         box.style.border = "solid 3px #ccc";
-        console.log("8");
     });
 }
