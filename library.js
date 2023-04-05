@@ -28,7 +28,6 @@ window.onclick = function(event) {
 
 // When submit is clicked, execute form validations + close the modal and add book information to library
 submitBtn.onclick = function(e) {
-
   // Form validations
   if (!title.value) {
     title.classList.add("invalid");
@@ -125,20 +124,26 @@ function displayLibrary() {
 for (i = 0, fullCount = 1; i < staging.children.length; i++) {
   if (staging.children[i].children.length == 0) {
     staging.children[i].appendChild(card);
+    console.log(staging.children[i]);
+    console.log(staging.children.length);
+    return
   }
   else if (staging.children[i].children.length != 0) {
     fullCount++;
   }
+
+
+  // Checks whether the staging area is full. If yes --> add additional row of staging
+  if (fullCount == staging.children.length) {
+    // Create an additional row of five staging boxes
+    for (j = 0; j < 5; j++) {
+    let rows = document.createElement("box");
+    rows.classList.add("box");
+    rows.setAttribute("id", "pl"[j + 6]);
+    staging.appendChild(rows);
+    }
+  }
 }
-
-// Checks whether the staging area is full. If yes --> add additional row of staging
-if (fullCount == staging.children.length) {
-  // ADD CODE HERE TO CREATE ADDITIONAL ROW OF STAGING BOX
-
-
-}
-
-
 
   // Toggle between 'Read' and 'Not read' when clicking readToggle button
   readToggle.addEventListener("click", function() {
@@ -171,7 +176,6 @@ deleteButton.addEventListener("click", function() {
   }
 
   library[x].deleted = true;
-  console.log(library);
 });
 }
 
@@ -237,7 +241,7 @@ function dragOver(e) {
       e.target.firstElementChild.classList.add('drag-block');
     }
 
-    // If dragging an item over an available box, higlight green
+    // If dragging an item over an available box, highlight green
   else if ((e.target.classList.contains('box')) && (e.target.children.length == 0)){
     e.target.style.backgroundColor = "rgba(95, 185, 136, 0.3)";
     e.target.style.border = "dashed 3px rgba(95, 185, 136)";
@@ -267,14 +271,13 @@ function drop(e) {
 
     // add it to the drop target
     e.target.appendChild(draggable);
-    console.log("SEVEN");
     // display the draggable element
     draggable.classList.remove('hide');
     e.target.firstElementChild.classList.remove('drag-block');
 
     // restore box background-colors and borders to original values
     boxes.forEach(box => {
-        box.style.backgroundColor = "white";
-        box.style.border = "solid 3px #ccc";
+        box.style.backgroundColor = "transparent";
+        box.style.border = "border: solid 3px #ccc;";
     });
 }
