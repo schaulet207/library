@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0 auto;
+    overflow-x: auto;
 }
 
 body {
@@ -348,22 +349,24 @@ ul {
     flex-direction: row-reverse;
     flex-wrap: wrap; */
     display: grid;
-    grid-template-columns: 18em 18em 18em 18em 18em;
-    grid-template-rows: auto;
-    gap: 10px;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.parkingLot .box {
+    margin: 0;
 }
 
 .short {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .medium {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .long {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
 }
