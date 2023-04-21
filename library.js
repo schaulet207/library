@@ -139,7 +139,7 @@ for (i = 0, plCount = 1; i < staging.children.length; i++) {
     for (j = 0; j < 5; j++) {
     let rows = document.createElement("div");
     rows.classList.add("box");
-    rows.setAttribute("id", "pl" + ([j + 6]));
+    rows.setAttribute("id", "pl" + ([j + plCount + 1]));
     staging.appendChild(rows);  
     boxes = document.querySelectorAll('.box');
     // rows.classList.add("unDragged");
@@ -147,7 +147,10 @@ for (i = 0, plCount = 1; i < staging.children.length; i++) {
     // rows.addEventListener('dragover', dragOver);
     // rows.addEventListener('dragleave', dragLeave);
     // rows.addEventListener('drop', drop);
-
+    }
+    console.log("yep that's the one");
+    for (let i = 1; i <= staging.children.length; i++){
+      containers.push(document.querySelector("#pl"+i));
     }
   }
 
