@@ -365,25 +365,50 @@ Need to include the following 'item' div within a 'box' div for testing
 
 // DRAGULA DRAG AND DROP TESTING
 // Initialize dragula with your containers
+
+// const containers = [document.querySelector('.parkingLot'), document.querySelector('.short'), document.querySelector('.medium'), document.querySelector('.long')];
+// const droppableContainer = document.querySelector('.box');
+// const drake = dragula(containers);
+
+// // Use the `drake.on` method to listen for the `drag` event on the draggable items
+// drake.on('drag', function(el) {
+//   el.style.borderColor = 'green';
+// });
+
 const containers = [document.querySelector('.parkingLot'), document.querySelector('.short'), document.querySelector('.medium'), document.querySelector('.long')];
 const droppableContainer = document.querySelector('.box');
 const drake = dragula(containers);
 
+let boxes = document.querySelectorAll('.box');
+
 // Use the `drake.on` method to listen for the `drag` event on the draggable items
 drake.on('drag', function(el) {
-  el.style.borderColor = 'green';
+  el.classList.add('drag-over');
+
+  boxes.forEach(box => {
+    box.style.backgroundColor = "rgba(81, 141, 254, 0.2)";
+    box.style.border = "dashed 3px rgba(81, 141, 254)";
+});
 });
 
-
-// Use the `drake.on` method to listen for the `drop` event on the droppable container
-
-drake.on('drop', function(el, target) {
-  if ((target === droppableContainer) && (target.children.length === 0))  {
-    // Do something with the dropped element in the droppable container
-    target.classList.add('unDragged');
-    el.style.borderColor = 'red';
+// Use the `drake.on` method to listen for the `dragover` event on the droppable container
+drake.on('dragover', function(el, container) {
+  if (target === droppableContainer) {
+    ell.style.borderColor = 'blue';
   }
 });
 
+// Use the `drake.on` method to listen for the `drop` event on the droppable container
+drake.on('drop', function(el, target) {
 
+    boxes.forEach(box => {
+      box.style.backgroundColor = "transparent";
+      box.style.border = "solid 3px #ccc";
+  });
+});
 
+// Use the `drake.on` method to listen for the `dragend` event on the draggable items
+drake.on('dragend', function(el) {
+  el.style.borderColor = '';
+  droppableContainer.style.borderColor = '';
+});
