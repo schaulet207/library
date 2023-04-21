@@ -95,8 +95,8 @@ function displayLibrary() {
 // Create card with content submitted from modal
   const card = document.createElement("div");
   card.classList.add('inner');
-  card.setAttribute("draggable", "true")
-  card.addEventListener('dragstart', dragStart);
+  // card.setAttribute("draggable", "true")
+  // card.addEventListener('dragstart', dragStart);
   card.id = bookID;
   const titleField = card.appendChild(document.createElement("h2"));
   titleField.innerText = library[bookID].title;
@@ -141,10 +141,10 @@ for (i = 0, plCount = 1; i < staging.children.length; i++) {
     // rows.classList.add("unDragged");
     rows.setAttribute("id", "pl" + ([j + 6]));
     staging.appendChild(rows);
-    rows.addEventListener('dragenter', dragEnter)
-    rows.addEventListener('dragover', dragOver);
-    rows.addEventListener('dragleave', dragLeave);
-    rows.addEventListener('drop', drop);
+    // rows.addEventListener('dragenter', dragEnter)
+    // rows.addEventListener('dragover', dragOver);
+    // rows.addEventListener('dragleave', dragLeave);
+    // rows.addEventListener('drop', drop);
     boxes = document.querySelectorAll('.box');
     }
   }
@@ -195,159 +195,195 @@ Need to include the following 'item' div within a 'box' div for testing
 // item.addEventListener('dragstart', dragStart);
 
 // KANBAN BOARD
-function dragStart(e) {
-    e.dataTransfer.setData('text/plain', e.target.id);
-    setTimeout(() => {
-        e.target.classList.add('hide');
-    }, 0);
-}
+// function dragStart(e) {
+//     e.dataTransfer.setData('text/plain', e.target.id);
+//     setTimeout(() => {
+//         e.target.classList.add('hide');
+//     }, 0);
+// }
 
-/* drop targets */
-let boxes = document.querySelectorAll('.box');
+// /* drop targets */
+// let boxes = document.querySelectorAll('.box');
 
-boxes.forEach(box => {
-    box.addEventListener('dragenter', dragEnter)
-    box.addEventListener('dragover', dragOver);
-    box.addEventListener('dragleave', dragLeave);
-    box.addEventListener('drop', drop);
+// (() => {
+//   const htmlElement = document.querySelector("html");
+
+//   htmlElement.addEventListener("drop", (e) => {
+//     if (e.currentTarget !== boxes) {
+//       console.log("Not dropped on an valid drop-agent");
+//     }  
+//   })
+// })();
+
+// boxes.forEach(box => {
+//     box.addEventListener('dragenter', dragEnter)
+//     box.addEventListener('dragover', dragOver);
+//     box.addEventListener('dragleave', dragLeave);
+//     box.addEventListener('drop', drop);
+// });
+
+// function dragEnter(e) {
+//     e.preventDefault();
+//     e.target.classList.add('drag-over');
+//     // change box background-colors and borders to green
+//     boxes.forEach(box => {
+//         box.style.backgroundColor = "rgba(81, 141, 254, 0.2)";
+//         box.style.border = "dashed 3px rgba(81, 141, 254)";
+//     });
+// }
+
+// function dragOver(e) {
+//     // Remove any temporary characteristics
+//     e.preventDefault();
+//     e.target.classList.remove('unDragged');
+//     e.target.classList.add('drag-over');
+
+//     // If dragging onto content within a box -> turn content red, change cursor to 'not-allowed' and prevent from dropping
+//     if ((e.target.parentElement.className === "box unDragged") || (e.target.parentElement.className === "box")) {
+//       e.target.classList.add('drag-block');
+      
+//   }
+//   // If dragging onto a box with content within -> turn content red, change cursor to 'not-allowed' and prevent from dropping
+//     else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
+//       e.target.firstElementChild.classList.add('drag-block');
+//     }
+
+//     // If dragging onto an empty box after trying to drop on a box with content -> restore normal styling, 
+//       // change cursor to 'draggable' and allow dropping
+//     else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
+//       e.target.firstElementChild.classList.add('drag-block');
+//     }
+
+//     // If dragging an item over an available box, highlight green
+//   else if ((e.target.classList.contains('box')) && (e.target.children.length == 0)){
+//     e.target.style.backgroundColor = "rgba(95, 185, 136, 0.3)";
+//     e.target.style.border = "dashed 3px rgba(95, 185, 136)";
+//     e.target.classList.remove('drag-block');
+//   }
+// }
+
+// function dragLeave(e) {
+//     e.target.classList.remove('drag-over');
+//     e.target.classList.remove('drag-block');
+//     e.target.classList.add('unDragged');
+//     e.target.style.transition = "0.1s";
+//     if ((e.target.children.length > 0) && (e.target.firstElementChild.classList.contains('drag-block'))) {
+//       e.target.firstElementChild.classList.remove('drag-block');
+//     }
+//     else {
+//       return;
+//     }
+// }
+
+// function drop(e) {
+//     e.target.classList.remove('drag-over');
+
+//     // get the draggable element
+//     const id = e.dataTransfer.getData('text');
+//     const draggable = document.getElementById(id);
+
+//     // add it to the drop target
+//     e.target.appendChild(draggable);
+//     // display the draggable element
+//     draggable.classList.remove('hide');
+//     e.target.firstElementChild.classList.remove('drag-block');
+
+//     // restore box background-colors and borders to original values
+//     boxes.forEach(box => {
+//         box.style.backgroundColor = "transparent";
+//         box.style.border = "solid 3px #ccc";
+//     });
+
+//   // Short staging area overflow logic
+//   let short = document.getElementById("short");
+//   for (k = 0, shortCount = 1; k < short.children.length; k++) {
+//     if (shortCount == short.children.length) {
+//       // Create an additional row of five staging boxes
+//       for (l = 0; l < 5; l++) {
+//       let rows = document.createElement("div");
+//       rows.classList.add("box");
+//       // rows.classList.add("unDragged");
+//       rows.setAttribute("id", "pl" + ([l + 6]));
+//       short.appendChild(rows);
+//       rows.addEventListener('dragenter', dragEnter)
+//       rows.addEventListener('dragover', dragOver);
+//       rows.addEventListener('dragleave', dragLeave);
+//       rows.addEventListener('drop', drop);
+//       boxes = document.querySelectorAll('.box');
+//       }
+//     }
+//     else if (short.children[k].children.length != 0 && (shortCount != short.children.length)) {
+//       shortCount++;
+//     }
+//   }
+// // Medium staging area overflow logic
+//   let medium = document.getElementById("medium");
+//   for (m = 0, mediumCount = 1; m < medium.children.length; m++) {
+//     if (mediumCount == medium.children.length) {
+//       // Create an additional row of five staging boxes
+//       for (n = 0; n < 5; n++) {
+//       let rows = document.createElement("div");
+//       rows.classList.add("box");
+//       // rows.classList.add("unDragged");
+//       rows.setAttribute("id", "pl" + ([n + 6]));
+//       medium.appendChild(rows);
+//       rows.addEventListener('dragenter', dragEnter)
+//       rows.addEventListener('dragover', dragOver);
+//       rows.addEventListener('dragleave', dragLeave);
+//       rows.addEventListener('drop', drop);
+//       boxes = document.querySelectorAll('.box');
+//       }
+//     }
+//     else if (medium.children[m].children.length != 0 && (mediumCount != medium.children.length)) {
+//       mediumCount++;
+//     }
+//   }
+// // Long staging area overflow logic
+// let long = document.getElementById("long");
+// for (o = 0, longCount = 1; o < long.children.length; o++) {
+//   if (longCount == long.children.length) {
+//     // Create an additional row of five staging boxes
+//     for (p = 0; p < 5; p++) {
+//     let rows = document.createElement("div");
+//     rows.classList.add("box");
+//     // rows.classList.add("unDragged");
+//     rows.setAttribute("id", "pl" + ([o + 6]));
+//     long.appendChild(rows);
+//     rows.addEventListener('dragenter', dragEnter)
+//     rows.addEventListener('dragover', dragOver);
+//     rows.addEventListener('dragleave', dragLeave);
+//     rows.addEventListener('drop', drop);
+//     boxes = document.querySelectorAll('.box');
+//     }
+//   }
+//   else if (long.children[o].children.length != 0 && (longCount != long.children.length)) {
+//     longCount++;
+//   }
+// }
+// }
+
+
+// DRAGULA DRAG AND DROP TESTING
+// Initialize dragula with your containers
+const containers = [document.querySelector('.parkingLot'), document.querySelector('.short'), document.querySelector('.medium'), document.querySelector('.long')];
+const droppableContainer = document.querySelector('.box');
+const drake = dragula(containers);
+
+// Use the `drake.on` method to listen for the `drag` event on the draggable items
+drake.on('drag', function(el) {
+  el.style.borderColor = 'green';
 });
 
-function dragEnter(e) {
-    e.preventDefault();
-    e.target.classList.add('drag-over');
-    // change box background-colors and borders to green
-    boxes.forEach(box => {
-        box.style.backgroundColor = "rgba(81, 141, 254, 0.2)";
-        box.style.border = "dashed 3px rgba(81, 141, 254)";
-    });
-}
 
-function dragOver(e) {
-    // Remove any temporary characteristics
-    e.preventDefault();
-    e.target.classList.remove('unDragged');
-    e.target.classList.add('drag-over');
+// Use the `drake.on` method to listen for the `drop` event on the droppable container
 
-    // If dragging onto content within a box -> turn content red, change cursor to 'not-allowed' and prevent from dropping
-    if ((e.target.parentElement.className === "box unDragged") || (e.target.parentElement.className === "box")) {
-      e.target.classList.add('drag-block');
-      
+drake.on('drop', function(el, target) {
+  if ((target === droppableContainer) && (target.children.length === 0))  {
+    // Do something with the dropped element in the droppable container
+    target.classList.add('unDragged');
+    el.style.borderColor = 'red';
   }
-  // If dragging onto a box with content within -> turn content red, change cursor to 'not-allowed' and prevent from dropping
-    else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
-      e.target.firstElementChild.classList.add('drag-block');
-    }
+});
 
-    // If dragging onto an empty box after trying to drop on a box with content -> restore normal styling, 
-      // change cursor to 'draggable' and allow dropping
-    else if ((e.target.children.length > 0) && (e.target.parentElement.className === "box unDragged" || "box")) {
-      e.target.firstElementChild.classList.add('drag-block');
-    }
 
-    // If dragging an item over an available box, highlight green
-  else if ((e.target.classList.contains('box')) && (e.target.children.length == 0)){
-    e.target.style.backgroundColor = "rgba(95, 185, 136, 0.3)";
-    e.target.style.border = "dashed 3px rgba(95, 185, 136)";
-    e.target.classList.remove('drag-block');
-  }
-}
 
-function dragLeave(e) {
-    e.target.classList.remove('drag-over');
-    e.target.classList.remove('drag-block');
-    e.target.classList.add('unDragged');
-    e.target.style.transition = "0.1s";
-    if ((e.target.children.length > 0) && (e.target.firstElementChild.classList.contains('drag-block'))) {
-      e.target.firstElementChild.classList.remove('drag-block');
-    }
-    else {
-      return;
-    }
-}
-
-function drop(e) {
-    e.target.classList.remove('drag-over');
-
-    // get the draggable element
-    const id = e.dataTransfer.getData('text');
-    const draggable = document.getElementById(id);
-
-    // add it to the drop target
-    e.target.appendChild(draggable);
-    // display the draggable element
-    draggable.classList.remove('hide');
-    e.target.firstElementChild.classList.remove('drag-block');
-
-    // restore box background-colors and borders to original values
-    boxes.forEach(box => {
-        box.style.backgroundColor = "transparent";
-        box.style.border = "solid 3px #ccc";
-    });
-
-  // Short staging area overflow logic
-  let short = document.getElementById("short");
-  for (k = 0, shortCount = 1; k < short.children.length; k++) {
-    if (shortCount == short.children.length) {
-      // Create an additional row of five staging boxes
-      for (l = 0; l < 5; l++) {
-      let rows = document.createElement("div");
-      rows.classList.add("box");
-      // rows.classList.add("unDragged");
-      rows.setAttribute("id", "pl" + ([l + 6]));
-      short.appendChild(rows);
-      rows.addEventListener('dragenter', dragEnter)
-      rows.addEventListener('dragover', dragOver);
-      rows.addEventListener('dragleave', dragLeave);
-      rows.addEventListener('drop', drop);
-      boxes = document.querySelectorAll('.box');
-      }
-    }
-    else if (short.children[k].children.length != 0 && (shortCount != short.children.length)) {
-      shortCount++;
-    }
-  }
-// Medium staging area overflow logic
-  let medium = document.getElementById("medium");
-  for (m = 0, mediumCount = 1; m < medium.children.length; m++) {
-    if (mediumCount == medium.children.length) {
-      // Create an additional row of five staging boxes
-      for (n = 0; n < 5; n++) {
-      let rows = document.createElement("div");
-      rows.classList.add("box");
-      // rows.classList.add("unDragged");
-      rows.setAttribute("id", "pl" + ([n + 6]));
-      medium.appendChild(rows);
-      rows.addEventListener('dragenter', dragEnter)
-      rows.addEventListener('dragover', dragOver);
-      rows.addEventListener('dragleave', dragLeave);
-      rows.addEventListener('drop', drop);
-      boxes = document.querySelectorAll('.box');
-      }
-    }
-    else if (medium.children[m].children.length != 0 && (mediumCount != medium.children.length)) {
-      mediumCount++;
-    }
-  }
-// Long staging area overflow logic
-let long = document.getElementById("long");
-for (o = 0, longCount = 1; o < long.children.length; o++) {
-  if (longCount == long.children.length) {
-    // Create an additional row of five staging boxes
-    for (p = 0; p < 5; p++) {
-    let rows = document.createElement("div");
-    rows.classList.add("box");
-    // rows.classList.add("unDragged");
-    rows.setAttribute("id", "pl" + ([o + 6]));
-    long.appendChild(rows);
-    rows.addEventListener('dragenter', dragEnter)
-    rows.addEventListener('dragover', dragOver);
-    rows.addEventListener('dragleave', dragLeave);
-    rows.addEventListener('drop', drop);
-    boxes = document.querySelectorAll('.box');
-    }
-  }
-  else if (long.children[o].children.length != 0 && (longCount != long.children.length)) {
-    longCount++;
-  }
-}
-}
