@@ -121,6 +121,7 @@ function displayLibrary() {
     }
 
 // For loop determines if a staging area is empty, then places the card there with appendChild 
+
 let medium = document.getElementById("medium");
 let long = document.getElementById("long");
 for (i = 0, plCount = 1; i < staging.children.length; i++) {
@@ -138,14 +139,15 @@ for (i = 0, plCount = 1; i < staging.children.length; i++) {
     for (j = 0; j < 5; j++) {
     let rows = document.createElement("div");
     rows.classList.add("box");
-    // rows.classList.add("unDragged");
     rows.setAttribute("id", "pl" + ([j + 6]));
-    staging.appendChild(rows);
+    staging.appendChild(rows);  
+    boxes = document.querySelectorAll('.box');
+    // rows.classList.add("unDragged");
     // rows.addEventListener('dragenter', dragEnter)
     // rows.addEventListener('dragover', dragOver);
     // rows.addEventListener('dragleave', dragLeave);
     // rows.addEventListener('drop', drop);
-    boxes = document.querySelectorAll('.box');
+
     }
   }
 
@@ -375,7 +377,24 @@ Need to include the following 'item' div within a 'box' div for testing
 //   el.style.borderColor = 'green';
 // });
 
-const containers = [document.querySelector('.parkingLot'), document.querySelector('.short'), document.querySelector('.medium'), document.querySelector('.long')];
+// const containers = [document.querySelector('.parkingLot'), document.querySelector('.short'), document.querySelector('.medium'), document.querySelector('.long')];
+// let containers = [document.querySelector('#pl1'), document.querySelector('#pl2'), document.querySelector('#pl3'), document.querySelector('#pl4')];
+
+// for (let i = 1; i < 20; i++){
+//   parkingLotContainers[i] = document.querySelector("#pl"+i);
+// }
+
+let containers = [];
+
+for (let i = 1; i < 50; i++){
+  containers.push(document.querySelector("#box"+i));
+}
+
+for (let i = 1; i <= staging.children.length; i++){
+  containers.push(document.querySelector("#pl"+i));
+}
+
+
 const droppableContainer = document.querySelector('.box');
 const drake = dragula(containers);
 
@@ -383,8 +402,6 @@ let boxes = document.querySelectorAll('.box');
 
 // Use the `drake.on` method to listen for the `drag` event on the draggable items
 drake.on('drag', function(el) {
-  el.classList.add('drag-over');
-
   boxes.forEach(box => {
     box.style.backgroundColor = "rgba(81, 141, 254, 0.2)";
     box.style.border = "dashed 3px rgba(81, 141, 254)";
@@ -394,7 +411,7 @@ drake.on('drag', function(el) {
 // Use the `drake.on` method to listen for the `dragover` event on the droppable container
 drake.on('dragover', function(el, container) {
   if (target === droppableContainer) {
-    ell.style.borderColor = 'blue';
+    target.style.borderColor = 'purple';
   }
 });
 
