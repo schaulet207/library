@@ -1,3 +1,5 @@
+// library.js
+
 // Get HTML fields
 const modal = document.getElementById("modal"); // Modal field
 const btn = document.getElementById("openModal"); // Get the button that opens the modal

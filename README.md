@@ -1,2 +1,2 @@
-# library
-A library to practice Object Orientated Programming in Javascript
+# admin-dashboard
+A full dashboard design built using Grid.
