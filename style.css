@@ -151,6 +151,29 @@ form h1 {
     font-family: 'Roboto', sans-serif;
 }
 
+
+.tier {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 48em;
+    grid-template-columns: repeat(5, 1fr);
+    border: solid 3px #ccc;
+    background-color: rgb(233, 132, 129);
+}
+
+.tier#a{
+    background-color: rgb(244, 193, 137);
+}
+
+.tier#b{
+    background-color: rgb(250, 224, 140);
+}
+
+.tier#c{
+    background-color: rgb(255, 255, 145);
+}
+
 input {
     height: 3rem;
     width: 15rem;
