@@ -148,7 +148,6 @@ for (i = 0, plCount = 1; i < staging.children.length; i++) {
     // rows.addEventListener('dragleave', dragLeave);
     // rows.addEventListener('drop', drop);
     }
-    console.log("yep that's the one");
     for (let i = 1; i <= staging.children.length; i++){
       containers.push(document.querySelector("#pl"+i));
     }
@@ -280,92 +279,92 @@ Need to include the following 'item' div within a 'box' div for testing
 //     }
 // }
 
-// function drop(e) {
-//     e.target.classList.remove('drag-over');
+function drop(e) {
+    e.target.classList.remove('drag-over');
 
-//     // get the draggable element
-//     const id = e.dataTransfer.getData('text');
-//     const draggable = document.getElementById(id);
+    // get the draggable element
+    const id = e.dataTransfer.getData('text');
+    const draggable = document.getElementById(id);
 
-//     // add it to the drop target
-//     e.target.appendChild(draggable);
-//     // display the draggable element
-//     draggable.classList.remove('hide');
-//     e.target.firstElementChild.classList.remove('drag-block');
+    // add it to the drop target
+    e.target.appendChild(draggable);
+    // display the draggable element
+    draggable.classList.remove('hide');
+    e.target.firstElementChild.classList.remove('drag-block');
 
-//     // restore box background-colors and borders to original values
-//     boxes.forEach(box => {
-//         box.style.backgroundColor = "transparent";
-//         box.style.border = "solid 3px #ccc";
-//     });
+    // restore box background-colors and borders to original values
+    boxes.forEach(box => {
+        box.style.backgroundColor = "transparent";
+        box.style.border = "solid 3px #ccc";
+    });
 
-//   // Short staging area overflow logic
-//   let short = document.getElementById("short");
-//   for (k = 0, shortCount = 1; k < short.children.length; k++) {
-//     if (shortCount == short.children.length) {
-//       // Create an additional row of five staging boxes
-//       for (l = 0; l < 5; l++) {
-//       let rows = document.createElement("div");
-//       rows.classList.add("box");
-//       // rows.classList.add("unDragged");
-//       rows.setAttribute("id", "pl" + ([l + 6]));
-//       short.appendChild(rows);
-//       rows.addEventListener('dragenter', dragEnter)
-//       rows.addEventListener('dragover', dragOver);
-//       rows.addEventListener('dragleave', dragLeave);
-//       rows.addEventListener('drop', drop);
-//       boxes = document.querySelectorAll('.box');
-//       }
-//     }
-//     else if (short.children[k].children.length != 0 && (shortCount != short.children.length)) {
-//       shortCount++;
-//     }
-//   }
-// // Medium staging area overflow logic
-//   let medium = document.getElementById("medium");
-//   for (m = 0, mediumCount = 1; m < medium.children.length; m++) {
-//     if (mediumCount == medium.children.length) {
-//       // Create an additional row of five staging boxes
-//       for (n = 0; n < 5; n++) {
-//       let rows = document.createElement("div");
-//       rows.classList.add("box");
-//       // rows.classList.add("unDragged");
-//       rows.setAttribute("id", "pl" + ([n + 6]));
-//       medium.appendChild(rows);
-//       rows.addEventListener('dragenter', dragEnter)
-//       rows.addEventListener('dragover', dragOver);
-//       rows.addEventListener('dragleave', dragLeave);
-//       rows.addEventListener('drop', drop);
-//       boxes = document.querySelectorAll('.box');
-//       }
-//     }
-//     else if (medium.children[m].children.length != 0 && (mediumCount != medium.children.length)) {
-//       mediumCount++;
-//     }
-//   }
-// // Long staging area overflow logic
-// let long = document.getElementById("long");
-// for (o = 0, longCount = 1; o < long.children.length; o++) {
-//   if (longCount == long.children.length) {
-//     // Create an additional row of five staging boxes
-//     for (p = 0; p < 5; p++) {
-//     let rows = document.createElement("div");
-//     rows.classList.add("box");
-//     // rows.classList.add("unDragged");
-//     rows.setAttribute("id", "pl" + ([o + 6]));
-//     long.appendChild(rows);
-//     rows.addEventListener('dragenter', dragEnter)
-//     rows.addEventListener('dragover', dragOver);
-//     rows.addEventListener('dragleave', dragLeave);
-//     rows.addEventListener('drop', drop);
-//     boxes = document.querySelectorAll('.box');
-//     }
-//   }
-//   else if (long.children[o].children.length != 0 && (longCount != long.children.length)) {
-//     longCount++;
-//   }
-// }
-// }
+  // Short staging area overflow logic
+  let short = document.getElementById("short");
+  for (k = 0, shortCount = 1; k < short.children.length; k++) {
+    if (shortCount == short.children.length) {
+      // Create an additional row of five staging boxes
+      for (l = 0; l < 5; l++) {
+      let rows = document.createElement("div");
+      rows.classList.add("box");
+      // rows.classList.add("unDragged");
+      rows.setAttribute("id", "pl" + ([l + 6]));
+      short.appendChild(rows);
+      rows.addEventListener('dragenter', dragEnter)
+      rows.addEventListener('dragover', dragOver);
+      rows.addEventListener('dragleave', dragLeave);
+      rows.addEventListener('drop', drop);
+      boxes = document.querySelectorAll('.box');
+      }
+    }
+    else if (short.children[k].children.length != 0 && (shortCount != short.children.length)) {
+      shortCount++;
+    }
+  }
+// Medium staging area overflow logic
+  let medium = document.getElementById("medium");
+  for (m = 0, mediumCount = 1; m < medium.children.length; m++) {
+    if (mediumCount == medium.children.length) {
+      // Create an additional row of five staging boxes
+      for (n = 0; n < 5; n++) {
+      let rows = document.createElement("div");
+      rows.classList.add("box");
+      // rows.classList.add("unDragged");
+      rows.setAttribute("id", "pl" + ([n + 6]));
+      medium.appendChild(rows);
+      rows.addEventListener('dragenter', dragEnter)
+      rows.addEventListener('dragover', dragOver);
+      rows.addEventListener('dragleave', dragLeave);
+      rows.addEventListener('drop', drop);
+      boxes = document.querySelectorAll('.box');
+      }
+    }
+    else if (medium.children[m].children.length != 0 && (mediumCount != medium.children.length)) {
+      mediumCount++;
+    }
+  }
+// Long staging area overflow logic
+let long = document.getElementById("long");
+for (o = 0, longCount = 1; o < long.children.length; o++) {
+  if (longCount == long.children.length) {
+    // Create an additional row of five staging boxes
+    for (p = 0; p < 5; p++) {
+    let rows = document.createElement("div");
+    rows.classList.add("box");
+    // rows.classList.add("unDragged");
+    rows.setAttribute("id", "pl" + ([o + 6]));
+    long.appendChild(rows);
+    rows.addEventListener('dragenter', dragEnter)
+    rows.addEventListener('dragover', dragOver);
+    rows.addEventListener('dragleave', dragLeave);
+    rows.addEventListener('drop', drop);
+    boxes = document.querySelectorAll('.box');
+    }
+  }
+  else if (long.children[o].children.length != 0 && (longCount != long.children.length)) {
+    longCount++;
+  }
+}
+}
 
 
 // DRAGULA DRAG AND DROP TESTING
@@ -397,6 +396,18 @@ for (let i = 1; i <= staging.children.length; i++){
   containers.push(document.querySelector("#pl"+i));
 }
 
+for (let i = 1; i <= staging.children.length; i++){
+  containers.push(document.querySelector("#short"+i));
+}
+
+for (let i = 1; i <= staging.children.length; i++){
+  containers.push(document.querySelector("#medium"+i));
+}
+
+for (let i = 1; i <= staging.children.length; i++){
+  containers.push(document.querySelector("#long"+i));
+}
+
 
 const droppableContainer = document.querySelector('.box');
 const drake = dragula(containers);
@@ -425,6 +436,73 @@ drake.on('drop', function(el, target) {
       box.style.backgroundColor = "transparent";
       box.style.border = "solid 3px #ccc";
   });
+
+  // Short staging area overflow logic
+  let short = document.getElementById("short");
+  for (k = 0, shortCount = 1; k < short.children.length; k++) {
+    if (shortCount == short.children.length) {
+      // Create an additional row of five staging boxes
+      for (l = 0; l < 5; l++) {
+      let rows = document.createElement("div");
+      rows.classList.add("box");
+      rows.setAttribute("id", "short" + ([l + shortCount + 1]));
+      short.appendChild(rows);
+      boxes = document.querySelectorAll('.box');
+      // rows.classList.add("unDragged");
+      }
+    }
+    else if (short.children[k].children.length != 0 && (shortCount != short.children.length)) {
+      shortCount++;
+    }
+    for (let i = 1; i <= short.children.length; i++){
+      containers.push(document.querySelector("#short"+i));
+    }
+  }
+// Medium staging area overflow logic
+  let medium = document.getElementById("medium");
+  for (m = 0, mediumCount = 1; m < medium.children.length; m++) {
+    if (mediumCount == medium.children.length) {
+      // Create an additional row of five staging boxes
+      for (n = 0; n < 5; n++) {
+      let rows = document.createElement("div");
+      rows.classList.add("box");
+      // rows.classList.add("unDragged");
+      rows.setAttribute("id", "medium" + ([n + mediumCount + 1]));
+      medium.appendChild(rows);
+      boxes = document.querySelectorAll('.box');
+      }
+    }
+    else if (medium.children[m].children.length != 0 && (mediumCount != medium.children.length)) {
+      mediumCount++;
+    }
+    for (let i = 1; i <= medium.children.length; i++){
+      containers.push(document.querySelector("#medium"+i));
+    }
+  }
+// Long staging area overflow logic
+let long = document.getElementById("long");
+for (o = 0, longCount = 1; o < long.children.length; o++) {
+  if (longCount == long.children.length) {
+    // Create an additional row of five staging boxes
+    for (p = 0; p < 5; p++) {
+    let rows = document.createElement("div");
+    rows.classList.add("box");
+    // rows.classList.add("unDragged");
+    rows.setAttribute("id", "long" + ([p + longCount + 1]));
+    long.appendChild(rows);
+    boxes = document.querySelectorAll('.box');
+    }
+  }
+  else if (long.children[o].children.length != 0 && (longCount != long.children.length)) {
+    longCount++;
+  }
+  for (let i = 1; i <= long.children.length; i++){
+    containers.push(document.querySelector("#long"+i));
+  }
+}
+
+
+
 });
 
 // Use the `drake.on` method to listen for the `dragend` event on the draggable items
