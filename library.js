@@ -17,7 +17,7 @@ function addBooks() {
 
 function addBook1() {
   bookID++;
-  let title = "The Fellowship of The Ring";
+  let title = "LOTR";
   let author = "J.R.R. Tolkien";
   let pages = "432 pages";
   let read = "off";
