@@ -280,17 +280,17 @@ Need to include the following 'item' div within a 'box' div for testing
 // }
 
 function drop(e) {
-    e.target.classList.remove('drag-over');
+    // e.target.classList.remove('drag-over');
 
-    // get the draggable element
-    const id = e.dataTransfer.getData('text');
-    const draggable = document.getElementById(id);
+    // // get the draggable element
+    // const id = e.dataTransfer.getData('text');
+    // const draggable = document.getElementById(id);
 
-    // add it to the drop target
-    e.target.appendChild(draggable);
-    // display the draggable element
-    draggable.classList.remove('hide');
-    e.target.firstElementChild.classList.remove('drag-block');
+    // // add it to the drop target
+    // e.target.appendChild(draggable);
+    // // display the draggable element
+    // draggable.classList.remove('hide');
+    // e.target.firstElementChild.classList.remove('drag-block');
 
     // restore box background-colors and borders to original values
     boxes.forEach(box => {
@@ -408,9 +408,12 @@ for (let i = 1; i <= staging.children.length; i++){
   containers.push(document.querySelector("#long"+i));
 }
 
-
 const droppableContainer = document.querySelector('.box');
-const drake = dragula(containers);
+const drake = dragula(containers, {
+  accepts: function (el, target) {
+    return target.children.length === 0;
+  }
+});
 
 let boxes = document.querySelectorAll('.box');
 
@@ -431,6 +434,10 @@ drake.on('dragover', function(el, container) {
 
 // Use the `drake.on` method to listen for the `drop` event on the droppable container
 drake.on('drop', function(el, target) {
+  // Remove any excess elements from the droppable container
+  while (target.children.length > 1) {
+    target.removeChild(target.lastChild);
+  }
 
     boxes.forEach(box => {
       box.style.backgroundColor = "transparent";
@@ -500,9 +507,6 @@ for (o = 0, longCount = 1; o < long.children.length; o++) {
     containers.push(document.querySelector("#long"+i));
   }
 }
-
-
-
 });
 
 // Use the `drake.on` method to listen for the `dragend` event on the draggable items
