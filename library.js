@@ -8,6 +8,58 @@ const submitBtn = document.getElementById("submitBtn");
 // create bookID variable
 var bookID = -1;
 
+// Create placeholder book objects
+function addBooks() {
+  addBook1();
+  addBook2();
+  addBook3();
+}
+
+function addBook1() {
+  bookID++;
+  let title = "The Fellowship of The Ring";
+  let author = "J.R.R. Tolkien";
+  let pages = "432 pages";
+  let read = "off";
+  let deleted = false;
+  let id = bookID;
+  
+  // Push new book to the library
+  let book = new Book(title, author, pages, read, id, deleted);
+  library.push(book);
+  displayLibrary();
+}
+
+function addBook2() {
+  bookID++;
+  let title = "The Two Towers";
+  let author = "J.R.R. Tolkien";
+  let pages = "448 pages";
+  let read = "on";
+  let deleted = false;
+  let id = bookID;
+  
+  // Push new book to the library
+  let book = new Book(title, author, pages, read, id, deleted);
+  library.push(book);
+  displayLibrary();
+}
+
+function addBook3() {
+  bookID++;
+  let title = "The Return of The King";
+  let author = "J.R.R. Tolkien";
+  let pages = "432 pages";
+  let read = "on";
+  let deleted = false;
+  let id = bookID;
+  
+  // Push new book to the library
+  let book = new Book(title, author, pages, read, id, deleted);
+  library.push(book);
+  displayLibrary();
+}
+
 // When the user clicks on the + Add button, open the modal
 btn.onclick = function() {
   document.getElementById("read").checked = false;
@@ -115,7 +167,8 @@ function displayLibrary() {
   if (read.checked === true) {
     readToggle.classList.add('isRead');
     readToggle.innerHTML=("Read");
-  } else {
+  } 
+  else {
     readToggle.classList.add('notRead');
     readToggle.innerHTML=("Not Read");
     }
