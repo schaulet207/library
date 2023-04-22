@@ -316,6 +316,7 @@ ul {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 5px;
 }
 
 .drag-over {
@@ -350,6 +351,7 @@ ul {
     flex-wrap: wrap; */
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
 }
 
 .parkingLot .box {

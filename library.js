@@ -432,11 +432,24 @@ drake.on('dragover', function(el, container) {
   }
 });
 
+// Use 'drake.on' OVER and OUT events to create a visual cue for where the card is being dropped
+drake.on('over', function(el, container) {
+  el.parentNode.style.backgroundColor = 'rgba(81, 141, 254, 0.2)';
+  el.parentNode.style.border = "dashed 3px rgba(81, 141, 254)";
+});
+
+drake.on('out', function(el, container) {
+  el.parentNode.style.backgroundColor = 'rgba(29, 52, 40, 0.3)';
+  el.parentNode.style.border = '3px dashed rgba(92, 184, 132)';
+});
+
 // Use the `drake.on` method to listen for the `drop` event on the droppable container
 drake.on('drop', function(el, target) {
   // Remove any excess elements from the droppable container
   while (target.children.length > 1) {
     target.removeChild(target.lastChild);
+    target.style.backgroundColor = "rgba(234, 51, 35, 0.5)";
+    target.style.border = "dashed 3px rgba(234, 51, 35)";
   }
 
     boxes.forEach(box => {
