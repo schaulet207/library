@@ -5,7 +5,7 @@ html {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    overflow-x: visible;
+    overflow: scroll;
 }
 
 :root {
@@ -60,6 +60,7 @@ div {
     align-items: center;
     border-radius: 8px;
     margin-left: 40px;
+    margin-right: 20px;
 }
 
 .header-row a{
@@ -155,6 +156,7 @@ div {
     padding: 20px;
     gap: 55px;
     padding-left: 40px;
+    overflow-x: scroll;
 }
 
 .cards {
@@ -742,24 +744,6 @@ figure.effect-zoe:hover figcaption > span:nth-child(2) {
     width: 100vw; /* Full width */
     height: 100vh; /* Full height */
   }
-  
-  /*
-  .modal-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    font-family: 'Fira Sans', sans-serif;
-    background-color: var(--jira-bg);
-    margin: 15% auto; /* 15% from the top and centered 
-    padding: 20px;
-    line-height: 1rem;    
-    border: 1px solid #888;
-    width: 40em; /* Could be more or less, depending on screen size 
-    height: 40em;
-    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
-  }
-*/
 
 .modal-content {
     display: flex;
@@ -774,7 +758,7 @@ figure.effect-zoe:hover figcaption > span:nth-child(2) {
     border: 1px solid;
     border-radius: 3px;
     width: 35em; 
-    height: 30em;
+    height: 24em;
     box-shadow: 0px 0px 20px rgba(0,0,0,.4);
   }
 
@@ -782,6 +766,7 @@ figure.effect-zoe:hover figcaption > span:nth-child(2) {
 
 .readInput {
     position: relative;
+    display: flex;
     flex-direction: row;
     justify-items: center;
     align-items: center;
@@ -795,24 +780,53 @@ label {
     color: rgb(201, 208, 217); 
 }
 
+#cancel {
+    background-image: none;
+    background: none;
+    position: relative;
+    left: 2em;
+    top: .2rem;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #aaa;
+    scale: 0.65;
+}
+
+#cancel:hover {
+    cursor: pointer;
+}
+
 #submitBtn {
-    height: 3rem;
-    width: 15rem;
+    height: 2.2rem;
+    width: 5rem;
     margin-top: 15px;
     background-color: rgba(104, 155, 248);
-    border-radius: 8px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    border-radius: 3px;
+    font-size: 1em;
+    font-family: var(--jira-font);
+    color: var(--dark-bg);
+    border: none;
+    position: relative;
+    bottom: 1.1rem;
+    left: 2.5em;
 }
 
 #submitBtn:hover {
     cursor: pointer;
 }
 
+#pageLabel {
+    font-size: 1em;
+    font-family: var(--jira-font);
+    color: white;
+    font-weight: normal;
+}
+
 form h1 {
-    position: relative;
-    bottom: .5em;
-    right: 6em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 12px;
     font-weight: bolder;
     font-size: 1.5em;
     font-family: var(--jira-font);
@@ -821,7 +835,7 @@ form h1 {
 
 .main input {
     height: 2.2rem;
-    width: 28rem;
+    width: 32rem;
     border-radius: 3px;
     border-width: 2.5px;
     border: 2px solid rgb(60, 66, 73);
@@ -867,6 +881,27 @@ form h1 {
     border-color: green;
 }
 
+#modalDiv {
+    position: relative;
+    bottom: 17px;
+    width: 33.2rem;
+    height: 1px;
+}
+
+#bottomRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2.6em;
+    margin-right: 3em;
+}
+
+#bottomLeft {
+    display: flex;
+    flex-direction: row;
+
+}
+
 /* Switch specific styles */
   
   input[type="checkbox"].switch{
@@ -883,6 +918,7 @@ form h1 {
     outline: none;
     -webkit-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
+    scale: 0.65;
     }
     
     input[type="checkbox"].switch:checked{
@@ -919,25 +955,6 @@ form {
     justify-content: center;
     align-items: center;
     margin: -10px;
-}
-
-/* Close button */
-.close {
-    position: relative;
-    left: 16em;
-    bottom: 0.5em;
-    color: #aaa;
-    background-image: url(img/close.svg);
-    float: right;
-    height: 47px;
-    width: 47px;
-    scale: 0.65;
-}
-
-.close:hover,
-.close:focus {
-    background-color: rgb(52, 55, 61);
-    cursor: pointer;
 }
 
 /*Library grid styling */

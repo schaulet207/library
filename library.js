@@ -4,6 +4,7 @@
 const modal = document.getElementById("modal"); // Modal field
 const btn = document.getElementById("openModal"); // Get the button that opens the modal
 const span = document.getElementsByClassName("close")[0]; // Get the <span> element that closes the modal
+const cancel = document.getElementById("cancel"); // Get the <span> cancel element in the modal
 const form = document.querySelector("form"); // Get the form
 const submitBtn = document.getElementById("submitBtn");
 
@@ -70,6 +71,11 @@ btn.onclick = function() {
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks on <span> cancel, close the modal
+cancel.onclick = function() {
   modal.style.display = "none";
 }
 

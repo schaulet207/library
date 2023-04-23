@@ -89,11 +89,17 @@
                                         <input type="text" id="title" name="title" placeholder="Title"><br><br>
                                         <input type="text" id="author" name="author" placeholder="Author"><br><br>
                                         <input type="number" id="pages" name="pages" placeholder="Number of pages"><br><br>
-                                        <div class="readInput">
-                                            <label for="pages">Have you read it?</label><br>
-                                            <input type="checkbox" id="read" class="switch" name="read">
+                                        <div class="s-divider" id="modalDiv"></div>
+                                        <div id="bottomRow">
+                                          <div id="bottomLeft">
+                                          <div class="readInput">
+                                              <label for="pages" id="pageLabel">Have you read it?</label><br>
+                                              <input type="checkbox" id="read" class="switch" name="read">
+                                          </div>
                                         </div>
-                                        <button type="button" id="submitBtn">Submit</button>
+                                          <span class="close" id="cancel">Cancel</span>
+                                          <button type="button" id="submitBtn">Submit</button>
+                                        </div>
                                       </form>
                                     </div>
                                   </div>
