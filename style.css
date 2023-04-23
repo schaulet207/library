@@ -10,12 +10,13 @@ html {
 
 :root {
     --txt: #f6fff8b7;
-    --txt2: font-family: 'Outfit', sans-serif;
+    --txt2: 'Work Sans', sans-serif;
     --dark-txt: rgb(97, 105, 107);
     --purple: rgb(161, 114, 247);
     --gray-bg: rgba(169, 169, 169, 0.486);
+    --jira-bg: rgb(40, 43, 47);
+    --jira-font: -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,'Fira Sans','Droid Sans','Helvetica Neue',sans-serif;
     --dark-bg: rgb(17, 16, 17);
-
 }
 
 .material-symbols-rounded {
@@ -205,6 +206,10 @@ div {
 
 .avatar:hover {
     cursor: pointer;
+}
+
+#notification {
+    background-image: url(img/Notifications.svg);
 }
 
 #dashboard {
@@ -738,33 +743,56 @@ figure.effect-zoe:hover figcaption > span:nth-child(2) {
     height: 100vh; /* Full height */
   }
   
+  /*
   .modal-content {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     font-family: 'Fira Sans', sans-serif;
-    background-color: #fff;
-    margin: 15% auto; /* 15% from the top and centered */
+    background-color: var(--jira-bg);
+    margin: 15% auto; /* 15% from the top and centered 
     padding: 20px;
     line-height: 1rem;    
     border: 1px solid #888;
-    width: 20em; /* Could be more or less, depending on screen size */
+    width: 40em; /* Could be more or less, depending on screen size 
+    height: 40em;
     box-shadow: 0px 0px 20px rgba(0,0,0,.4);
   }
+*/
+
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Fira Sans', sans-serif;
+    background-color: var(--jira-bg);
+    margin: 15% auto; 
+    padding: 20px;
+    line-height: 1rem;    
+    border: 1px solid;
+    border-radius: 3px;
+    width: 35em; 
+    height: 30em;
+    box-shadow: 0px 0px 20px rgba(0,0,0,.4);
+  }
+
+
 
 .readInput {
     position: relative;
     flex-direction: row;
     justify-items: center;
+    align-items: center;
     bottom: 10px;
 }
 
 label {
-    font-size: 1.2em;
     font-weight: bolder;
-    text-decoration: underline;
-    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+    font-family: var(--jira-font);
+    color: rgb(201, 208, 217); 
 }
 
 #submitBtn {
@@ -784,18 +812,43 @@ label {
 form h1 {
     position: relative;
     bottom: .5em;
+    right: 6em;
     font-weight: bolder;
-    font-size: 2em;
-    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    font-family: var(--jira-font);
+    color: rgb(201, 208, 217);    
 }
 
 .main input {
-    height: 3rem;
-    width: 15rem;
-    font-weight: bold;
-    border-radius: 8px;
+    height: 2.2rem;
+    width: 28rem;
+    border-radius: 3px;
     border-width: 2.5px;
-    font-size: 1.5em;
+    border: 2px solid rgb(60, 66, 73);
+    font-size: 1em;
+    font-family: var(--jira-font);
+    color: white;
+    background-color: rgb(35, 38, 41);
+}
+
+.main input::placeholder {
+    color: white;
+    font-weight: normal;
+}
+
+.main input#title {
+    padding: 9px;
+}
+.main input#author {
+    padding: 9px;
+}
+.main input#pages {
+    padding: 9px;
+}
+
+
+.main input:hover {
+    background-color: rgb(41, 43, 47);
 }
 
 .invalid::placeholder {
@@ -814,12 +867,47 @@ form h1 {
     border-color: green;
 }
 
-input#read {
+/* Switch specific styles */
+  
+  input[type="checkbox"].switch{
+    font-size: 30px;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    width: 3.5em;
+    height: 1.5em;
+    background: #ddd;
+    border-radius: 3em;
     position: relative;
-    top: 8px;
-    height: 2rem;
-    width: 5rem;
-}
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    }
+    
+    input[type="checkbox"].switch:checked{
+    background: lightgreen;
+    }
+    
+    input[type="checkbox"].switch:after{
+    position: absolute;
+    content: "";
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 .25em rgba(0,0,0,.3);
+            box-shadow: 0 0 .25em rgba(0,0,0,.3);
+    -webkit-transform: scale(.7);
+            transform: scale(.7);
+    left: 0;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    }
+    
+    input[type="checkbox"].switch:checked:after{
+    left: calc(100% - 1.5em);
+    }
 
 input#read:hover {
     cursor: pointer
@@ -830,22 +918,25 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: -10px;
 }
 
 /* Close button */
 .close {
     position: relative;
-    left: 5.5em;
+    left: 16em;
+    bottom: 0.5em;
     color: #aaa;
+    background-image: url(img/close.svg);
     float: right;
-    font-size: 28px;
-    font-weight: bold;
+    height: 47px;
+    width: 47px;
+    scale: 0.65;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
-    text-decoration: none;
+    background-color: rgb(52, 55, 61);
     cursor: pointer;
 }
 
@@ -1031,14 +1122,18 @@ ul {
 .tier {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 70px;
     width: 44em;
     grid-template-columns: repeat(5, 1fr);
-    border: solid 3px #ccc;
-    background-color: rgb(233, 132, 129);
+    /* border: solid 3px #ccc;
+    background-color: rgb(233, 132, 129); */
     font-size: 24px;
+    font-family: var(--txt2);
+    color: var(--purple);
 }
-
+/* 
 .tier#s {
     
 }
@@ -1053,4 +1148,4 @@ ul {
 
 .tier#c {
     background-color: rgb(255, 255, 145);
-}
+} */
