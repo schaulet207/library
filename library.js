@@ -183,20 +183,25 @@ function displayLibrary() {
   div.setAttribute("id", "cardDiv");
   const cardBottom = card.appendChild(document.createElement("div"));
   cardBottom.classList.add("cardBottom");
-  const readToggle = cardBottom.appendChild(document.createElement("button"));
-  readToggle.classList.add('cardButton');
+  const readLabel = cardBottom.appendChild(document.createElement("div"));
+  readLabel.classList.add("pageLabel");
+  readLabel.innerHTML=("Mark as read:");
+  readLabel.setAttribute("id", "readLabel");
+  const readToggle = cardBottom.appendChild(document.createElement("input"));
+  readToggle.classList.add('switch');
+  readToggle.setAttribute("id", "read");
+  readToggle.setAttribute("type", "checkbox");
   readToggle.id = bookID;
   const deleteButton = cardBottom.appendChild(document.createElement("button"));
   deleteButton.classList.add('cardButton');
-  deleteButton.innerHTML=("Delete");
   deleteButton.id = bookID;
   if ((library[bookID].read == "on") || read.checked == true) {
     readToggle.classList.add('isRead');
-    readToggle.innerHTML=("Read");
+    readToggle.checked=true;
   } 
   else {
     readToggle.classList.add('notRead');
-    readToggle.innerHTML=("Not Read");
+    readToggle.checked=false;
     }
 
 // For loop determines if a staging area is empty, then places the card there with appendChild 
