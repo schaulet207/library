@@ -24,7 +24,7 @@ function addBook1() {
   let author = "J.R.R. Tolkien";
   let pages = "432";
   let published = "1954";
-  let read = "off";
+  let read = "on";
   let deleted = false;
   let id = bookID;
   
@@ -144,7 +144,7 @@ let title = document.getElementById("title").value;
 let author = document.getElementById("author").value;
 let pages = document.getElementById("pages").value;
 let published = document.getElementById("published").value;
-let read = document.getElementById("read").value;
+let read = document.getElementById("read");
 let deleted = false;
 let id = bookID;
 
@@ -178,6 +178,9 @@ function displayLibrary() {
   pagesField.innerText = "Pages: " + library[bookID].pages;
   const published = card.appendChild(document.createElement("h4"));
   published.innerText = "Published: " + library[bookID].published;
+  const div = card.appendChild(document.createElement("div"));
+  div.classList.add("s-divider");
+  div.setAttribute("id", "cardDiv");
   const cardBottom = card.appendChild(document.createElement("div"));
   cardBottom.classList.add("cardBottom");
   const readToggle = cardBottom.appendChild(document.createElement("button"));
@@ -187,7 +190,7 @@ function displayLibrary() {
   deleteButton.classList.add('cardButton');
   deleteButton.innerHTML=("Delete");
   deleteButton.id = bookID;
-  if (read.checked === true) {
+  if ((library[bookID].read == "on") || read.checked == true) {
     readToggle.classList.add('isRead');
     readToggle.innerHTML=("Read");
   } 

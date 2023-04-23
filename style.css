@@ -734,13 +734,20 @@ input {
     margin-top: 1em;
 }
 
+#cardDiv {
+    position: relative;
+    top: .8em;
+    left: 1em;
+    width: 16em;
+    height: 2px;
+}
+
 #bottomRow {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 2.6em;
     margin-right: 3em;
-    margin-top: 1em;
 }
 
 #bottomLeft {
@@ -893,7 +900,8 @@ ul {
     flex-direction: row;
     gap: 3em;
     margin-left: 1em;
-    margin-top: 1.3em;
+    margin-top: 1em;
+    margin-bottom: .5em;
 }
 
 .cardButton {
