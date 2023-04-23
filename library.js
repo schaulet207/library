@@ -22,13 +22,14 @@ function addBook1() {
   bookID++;
   let title = "The Fellowship of The Ring";
   let author = "J.R.R. Tolkien";
-  let pages = "432 pages";
+  let pages = "432";
+  let published = "1954";
   let read = "off";
   let deleted = false;
   let id = bookID;
   
   // Push new book to the library
-  let book = new Book(title, author, pages, read, id, deleted);
+  let book = new Book(title, author, pages, published, read, id, deleted);
   library.push(book);
   displayLibrary();
 }
@@ -37,13 +38,14 @@ function addBook2() {
   bookID++;
   let title = "The Two Towers";
   let author = "J.R.R. Tolkien";
-  let pages = "448 pages";
+  let pages = "448";
+  let published = "1954";
   let read = "on";
   let deleted = false;
   let id = bookID;
   
   // Push new book to the library
-  let book = new Book(title, author, pages, read, id, deleted);
+  let book = new Book(title, author, pages, published, read, id, deleted);
   library.push(book);
   displayLibrary();
 }
@@ -52,13 +54,14 @@ function addBook3() {
   bookID++;
   let title = "The Return of The King";
   let author = "J.R.R. Tolkien";
-  let pages = "432 pages";
+  let pages = "432";
+  let published = "1955";
   let read = "on";
   let deleted = false;
   let id = bookID;
   
   // Push new book to the library
-  let book = new Book(title, author, pages, read, id, deleted);
+  let book = new Book(title, author, pages, published, read, id, deleted);
   library.push(book);
   displayLibrary();
 }
@@ -107,7 +110,13 @@ submitBtn.onclick = function(e) {
     pages.classList.remove('invalid');
   }
 
-  if (title.value && author.value && pages.value) {
+  if (!published.value) {
+    published.classList.add("invalid");
+  } else {
+    published.classList.remove('invalid');
+  }
+
+  if (title.value && author.value && pages.value && published.value) {
     modal.style.display = "none";
     addBook();
   }
@@ -118,10 +127,11 @@ submitBtn.onclick = function(e) {
 let library = [];
       
 // Book constructor
-function Book(title, author, pages, read, id, deleted) {
+function Book(title, author, pages, published, read, id, deleted) {
 this.title = title;
 this.author = author;
 this.pages = pages;
+this.published = published;
 this.read = read;
 this.id = bookID;
 this.deleted = deleted;
@@ -133,18 +143,20 @@ bookID++;
 let title = document.getElementById("title").value;
 let author = document.getElementById("author").value;
 let pages = document.getElementById("pages").value;
+let published = document.getElementById("published").value;
 let read = document.getElementById("read").value;
 let deleted = false;
 let id = bookID;
 
 // Push new book to the library
-let book = new Book(title, author, pages, read, id, deleted);
+let book = new Book(title, author, pages, published, read, id, deleted);
 library.push(book);
 
 // Clear any content from previous displayed card before displaying new card
 document.getElementById("title").value = "";
 document.getElementById("author").value = "";
 document.getElementById("pages").value = "";
+document.getElementById("published").value = "";
 displayLibrary();
 }
 
@@ -161,16 +173,19 @@ function displayLibrary() {
   const titleField = card.appendChild(document.createElement("h2"));
   titleField.innerText = library[bookID].title;
   const authorField = card.appendChild(document.createElement("h3"));
-  authorField.innerText = "by " + library[bookID].author;
+  authorField.innerText = "By: " + library[bookID].author;
   const pagesField = card.appendChild(document.createElement("h4"));
-  pagesField.innerText = library[bookID].pages + " pages";
-  const readToggle = card.appendChild(document.createElement("button"));
+  pagesField.innerText = "Pages: " + library[bookID].pages;
+  const published = card.appendChild(document.createElement("h4"));
+  published.innerText = "Published: " + library[bookID].published;
+  const cardBottom = card.appendChild(document.createElement("div"));
+  cardBottom.classList.add("cardBottom");
+  const readToggle = cardBottom.appendChild(document.createElement("button"));
   readToggle.classList.add('cardButton');
   readToggle.id = bookID;
-  const deleteButton = card.appendChild(document.createElement("button"));
+  const deleteButton = cardBottom.appendChild(document.createElement("button"));
   deleteButton.classList.add('cardButton');
   deleteButton.innerHTML=("Delete");
-  deleteButton.style.backgroundColor=("red");  
   deleteButton.id = bookID;
   if (read.checked === true) {
     readToggle.classList.add('isRead');
@@ -238,10 +253,10 @@ deleteButton.addEventListener("click", function() {
   let x = this.id;
 
   // Targets the parent box of the button being clicked and removes any content
-  if (deleteButton.parentElement.classList.contains('frame')) {
+  if (deleteButton.parentElement.parentElement.classList.contains('frame')) {
     deleteButton.closest(".frame").remove();
   }
-  else if (deleteButton.parentElement.classList.contains('inner')) {
+  else if (deleteButton.parentElement.parentElement.classList.contains('inner')) {
     deleteButton.closest(".inner").remove();
   }
 
@@ -581,6 +596,19 @@ for (o = 0, longCount = 1; o < long.children.length; o++) {
     containers.push(document.querySelector("#long"+i));
   }
 }
+if (target.id.includes("pl")) {
+  el.children[0].style.color="var(--purple)";
+}
+else if (target.id.includes("short")) {
+  el.children[0].style.color="green";
+}
+else if (target.id.includes("medium")) {
+  el.children[0].style.color="yellow";
+}
+else if (target.id.includes("long")) {
+  el.children[0].style.color="orange";
+}
+
 });
 
 // Use the `drake.on` method to listen for the `dragend` event on the draggable items
