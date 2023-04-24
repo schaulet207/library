@@ -70,28 +70,37 @@ function addBook3() {
 btn.onclick = function() {
   document.getElementById("read").checked = false;
   modal.style.display = "block";
+  editTitle.innerHTML = "Add Book";
+
 }
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
   modal.style.display = "none";
+  clearContent();
 }
 
 // When the user clicks on <span> cancel, close the modal
 cancel.onclick = function() {
   modal.style.display = "none";
+  clearContent();
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
+    clearContent();
   }
 }
 
 // When submit is clicked, execute form validations + close the modal and add book information to library
 submitBtn.onclick = function(e) {
-  // Form validations
+  validate();
+}
+
+function validate () {
+  // Form validations and also handles Edit or Add card logic
   if (!title.value) {
     title.classList.add("invalid");
   } else {
@@ -116,9 +125,35 @@ submitBtn.onclick = function(e) {
     published.classList.remove('invalid');
   }
 
-  if (title.value && author.value && pages.value && published.value) {
+  if (title.value && author.value && pages.value && published.value && (editTitle.innerHTML.includes("Add"))) {
     modal.style.display = "none";
     addBook();
+  }
+  else if (title.value && author.value && pages.value && published.value && (editTitle.innerHTML.includes("Edit"))) {
+    modal.style.display = "none";
+    editBook();
+  }
+}
+
+// Clear any content from previous displayed card before displaying new card
+function clearContent() {
+document.getElementById("title").value = "";
+document.getElementById("author").value = "";
+document.getElementById("pages").value = "";
+document.getElementById("published").value = "";
+}
+
+// Transfer information from 'Edit' modal to library array
+function editBook() {
+  library[bookID].title = title.value;
+  library[bookID].author = author.value;
+  library[bookID].pages = pages.value;
+  library[bookID].published = published.value;
+  if (read.checked == true) {
+    library[bookID].read = 'on';
+  }
+  else {
+    library[bookID].read = 'off';
   }
 }
 
@@ -153,10 +188,7 @@ let book = new Book(title, author, pages, published, read, id, deleted);
 library.push(book);
 
 // Clear any content from previous displayed card before displaying new card
-document.getElementById("title").value = "";
-document.getElementById("author").value = "";
-document.getElementById("pages").value = "";
-document.getElementById("published").value = "";
+clearContent();
 displayLibrary();
 }
 
@@ -204,8 +236,26 @@ function displayLibrary() {
     readToggle.checked=false;
     }
 
-// For loop determines if a staging area is empty, then places the card there with appendChild 
+card.addEventListener("click", function() {
 
+  modal.style.display = "block";
+  const editTitle = document.getElementById("editTitle");
+  editTitle.innerHTML = "Edit Book";
+  title.value = library[card.id].title;
+  author.value = library[card.id].author;
+  pages.value = library[card.id].pages;
+  var publishedField = document.getElementById("published");
+  publishedField.value = library[card.id].published;
+  var readField = document.getElementById("read");
+  if ((library[card.id].read == "on") || readToggle.checked == true) {
+  readField.checked = true;
+  }
+  else {
+    readField.checked = false;
+  }
+});
+    
+// For loop determines if a staging area is empty, then places the card there with appendChild 
 let medium = document.getElementById("medium");
 let long = document.getElementById("long");
 for (i = 0, plCount = 1; i < staging.children.length; i++) {
@@ -240,7 +290,6 @@ for (i = 0, plCount = 1; i < staging.children.length; i++) {
   // Toggle between 'Read' and 'Not read' when clicking readToggle button
   readToggle.addEventListener("click", function() {
     let x = this.id;
-
     if (readToggle.classList.contains('isRead')) {
       readToggle.classList.remove('isRead');
       readToggle.classList.add('notRead');
@@ -253,13 +302,11 @@ for (i = 0, plCount = 1; i < staging.children.length; i++) {
       readToggle.innerHTML=("Read");
       library[x].read = 'on';
     }
-    
+    event.stopImmediatePropagation();
   });
 
-// If delete button is clicked - remove card entirely
-deleteButton.addEventListener("click", function() {
+deleteButton.addEventListener("click", function deleteCard() {
   let x = this.id;
-
   // Targets the parent box of the button being clicked and removes any content
   if (deleteButton.parentElement.parentElement.classList.contains('frame')) {
     deleteButton.closest(".frame").remove();
@@ -267,8 +314,8 @@ deleteButton.addEventListener("click", function() {
   else if (deleteButton.parentElement.parentElement.classList.contains('inner')) {
     deleteButton.closest(".inner").remove();
   }
-
   library[x].deleted = true;
+  event.stopImmediatePropagation();
 });
 }
 
@@ -364,18 +411,6 @@ Need to include the following 'item' div within a 'box' div for testing
 // }
 
 function drop(e) {
-    // e.target.classList.remove('drag-over');
-
-    // // get the draggable element
-    // const id = e.dataTransfer.getData('text');
-    // const draggable = document.getElementById(id);
-
-    // // add it to the drop target
-    // e.target.appendChild(draggable);
-    // // display the draggable element
-    // draggable.classList.remove('hide');
-    // e.target.firstElementChild.classList.remove('drag-block');
-
     // restore box background-colors and borders to original values
     boxes.forEach(box => {
         box.style.backgroundColor = "transparent";
@@ -449,26 +484,6 @@ for (o = 0, longCount = 1; o < long.children.length; o++) {
   }
 }
 }
-
-
-// DRAGULA DRAG AND DROP TESTING
-// Initialize dragula with your containers
-
-// const containers = [document.querySelector('.parkingLot'), document.querySelector('.short'), document.querySelector('.medium'), document.querySelector('.long')];
-// const droppableContainer = document.querySelector('.box');
-// const drake = dragula(containers);
-
-// // Use the `drake.on` method to listen for the `drag` event on the draggable items
-// drake.on('drag', function(el) {
-//   el.style.borderColor = 'green';
-// });
-
-// const containers = [document.querySelector('.parkingLot'), document.querySelector('.short'), document.querySelector('.medium'), document.querySelector('.long')];
-// let containers = [document.querySelector('#pl1'), document.querySelector('#pl2'), document.querySelector('#pl3'), document.querySelector('#pl4')];
-
-// for (let i = 1; i < 20; i++){
-//   parkingLotContainers[i] = document.querySelector("#pl"+i);
-// }
 
 let containers = [];
 

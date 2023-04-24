@@ -1,7 +1,36 @@
 /* style.css */
 
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: var(--dark-bg);
+}
+
+::-webkit-scrollbar
+{
+	background: #000;
+    background-clip: padding-box;
+    border-radius: 7px;
+    min-height: 10px;
+    opacity: 0;
+    position: absolute;
+    right: 2px;
+    -webkit-transition: opacity .2s linear;
+    transition: opacity .2s linear;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb
+{
+    border-radius: 7px;
+    min-height: 10px;
+    max-height: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: rgb(98, 98, 99);
+}
+
 html {
-    /* background-color: rgba(252, 250, 250); */
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
@@ -507,6 +536,10 @@ h4{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-left: .5em;
+    /* scale: 0.9;
+    position: relative;
+    bottom: 5em; */
 }
 
 /* Modal */
@@ -773,7 +806,7 @@ input {
     -webkit-appearance: none;
        -moz-appearance: none;
             appearance: none;
-    width: 3.5em;
+    width: 3em;
     height: 1.5em;
     background: #ddd;
     border-radius: 3em;
@@ -846,10 +879,10 @@ ul {
 }
 
 .inner {
-    min-height: 12em;
-    min-width: 18em;
-    max-height: 12em;
-    max-width: 18em;
+    min-height: 11em;
+    min-width: 16.9em;
+    max-height: 11em;
+    max-width: 16.9em;
     /* border: solid 3px #ccc; */
     background-color: var(--jira-bg);
     cursor: all-scroll;
@@ -916,31 +949,22 @@ ul {
 }
 
 .cardButton {
-    height: 2.5rem;
-    width: 3rem;
-    margin-top: 15px;
-    border-radius: 50%;
-    border: 2px solid var(--gray-bg);
-    font-size: 1.5rem;
+    /* border-radius: 3%;
+    border: 2px solid var(--gray-bg); */
     font-family: var(--jira-font);
     position: relative;
-    bottom: .7rem;
-    left: 2.5rem;
-
-    background: url(img/trash.svg);
-    background-color: #fff;
-    background-size: 80%;
+    left: 4.5em;
+    height: 3.2em;
+    width: 3.2em;
+    background: url(img/trash2.svg);
+    background-size: 70%;
     background-repeat: no-repeat;
     background-position: center;
 }
 
 .cardButton:hover {
     cursor: pointer;
-    background: url(img/trash2.svg);
-    background-color: var(--dark-bg);
-    background-size: .7em;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: red;
 }
 
 input[type="checkbox"].isRead {
@@ -962,10 +986,11 @@ input[type="checkbox"].notRead {
 }
 
 .box {
-    min-height: 16em;
-    min-width: 25em;
-    max-height: 18em;
-    max-width: 25em;
+    min-width: 22em;
+    max-width: 22em;     
+    min-height: 15em;    
+    max-height: 15em;
+
     border: solid 3px #ccc;
     margin: 0px;
     /* align items in the box */
@@ -974,7 +999,6 @@ input[type="checkbox"].notRead {
     align-items: center;
     justify-content: center;
     border-radius: 5px;
-    scale: 0.65;
 }
 
 .drag-over {
@@ -1008,46 +1032,43 @@ input[type="checkbox"].notRead {
     flex-direction: row-reverse;
     flex-wrap: wrap; */
     position: relative;
-    bottom: 50px;
-    right: 3em;
     display: grid;
-    grid-template-columns: repeat(5, 200px);
-    grid-template-rows: repeat(1, 175px);
-    gap: 4.5em;
+    grid-template-columns: repeat(5, 18em);
+    grid-template-rows: repeat(1, auto);
+    gap: 5em;
+    right: 3em;
+    align-content: center;
+    margin-bottom: -4em;
 }
 
-.parkingLot .box {
+.parkingLot {
     margin: 0;
 }
 
 .short {
     display: grid;
-    grid-template-columns: repeat(5, 200px);
-    grid-template-rows: 175px;
-    position: relative;
-    bottom: 50px;
+    position: relative;    
+    grid-template-columns: repeat(5, 18em);
+    grid-template-rows: repeat(1, auto);
+    gap: 5em;
     right: 3em;
-    gap: 4.5em;
 }
 
 .medium {
-    display: grid;
-    grid-template-columns: repeat(5, 200px);
-    grid-template-rows: 175px;
-    position: relative;
-    bottom: 50px;
+    position: relative;   
+    grid-template-columns: repeat(5, 18em);
+    grid-template-rows: repeat(1, auto);
+    gap: 5em;
     right: 3em;
-    gap: 4.5em;
 }
 
 .long {
     display: grid;
-    grid-template-columns: repeat(5, 200px);
-    grid-template-rows: 175px;
-    position: relative;
-    bottom: 50px;
+    position: relative;    
+    grid-template-columns: repeat(5, 18em);
+    grid-template-rows: repeat(1, auto);
+    gap: 5em;
     right: 3em;
-    gap: 4.5em;
 }
 
 /* Tier styling */
@@ -1056,14 +1077,22 @@ input[type="checkbox"].notRead {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    margin-right: 11.5rem;
-    width: 44em;
+    width: 4em;
+    position: relative;
+    right: 23em;
+    margin: 0;
+    bottom: 1rem;
     grid-template-columns: repeat(5, 1fr);
     /* border: solid 3px #ccc;
     background-color: rgb(233, 132, 129); */
-    font-size: 24px;
+    font-size: 36px;
     font-family: var(--txt2);
     color: var(--purple);
+    margin-top: 2em;
+}
+
+#s {
+    margin-top: 0;
 }
 
 #a {
