@@ -240,8 +240,22 @@ div {
 }
 
 #notification {
-    background-image: url(img/Notifications.svg);
-}
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .image {
+    background-image: url("img/Notifications.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+  }
+  
+  #notification:hover .image {
+    background-image: url("img/Notifications2.svg");
+  }
 
 #dashboard {
     background-image: url(img/Speed.svg);
@@ -374,7 +388,6 @@ input {
 
   .searchTerm:hover:not(:focus) {
     border: 1px solid rgb(88, 88, 90);
-    transition-duration: .3s;
   }
 
   .searchTerm:hover:not(:focus) + .searchButton {
