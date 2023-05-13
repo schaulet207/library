@@ -133,7 +133,7 @@ function validate () {
   else if (title.value && author.value && pages.value && published.value && (editTitle.innerHTML.includes("Edit"))) {
     modal.style.display = "none";
     editBook();
-    console.log(editID)
+    editCard();
     
   }
 }
@@ -213,6 +213,7 @@ function displayLibrary() {
   pagesField.innerText = "Pages: " + library[bookID].pages;
   const published = card.appendChild(document.createElement("h4"));
   published.innerText = "Published: " + library[bookID].published;
+  published.classList.add("published");
   const div = card.appendChild(document.createElement("div"));
   div.classList.add("s-divider");
   div.setAttribute("id", "cardDiv");
@@ -324,6 +325,34 @@ deleteButton.addEventListener("click", function deleteCard() {
   library[x].deleted = true;
   event.stopImmediatePropagation();
 });
+}
+
+function editCard() {
+  let parentCard = document.getElementById(editID); // Get the card element being edited using editID
+  let editTitle = parentCard.querySelector("h2"); // Get the <h2> element within the card element
+  let editAuthor = parentCard.querySelector("h3"); // Get the <h3> element within the card element
+  let editPages = parentCard.querySelector("h4"); // Get the <h4> element within the card element
+  let editPublished = parentCard.querySelector("h4.published"); // Get the published element by class name
+  // let cardBottom = document.getElementById("bottom" + editID);
+  // let editRead = cardBottom.querySelector('switch'); // Get the read toggle element by class name
+
+
+  // Update the title
+  editTitle.innerHTML = library[editID].title;
+  // Update the author
+  editAuthor.innerHTML = library[editID].author;
+  // Update the pages
+  editPages.innerHTML = library[editID].pages;
+  // Update the published year
+  editPublished.innerHTML = library[editID].published;
+  // // Update the read toggle
+  // if (library[editID].read === 'off') {
+  //   editRead.classList = 'switch notRead';
+  // }
+  // else {
+  //   editRead.classList.remove('notRead');
+  //   editRead.classList.add('isRead');
+  // }
 }
 
 /* Draggable element functionality for 'item'
