@@ -10,6 +10,7 @@ const submitBtn = document.getElementById("submitBtn");
 
 // create bookID variable
 var bookID = -1;
+var editID;
 
 // Create placeholder book objects
 function addBooks() {
@@ -132,6 +133,8 @@ function validate () {
   else if (title.value && author.value && pages.value && published.value && (editTitle.innerHTML.includes("Edit"))) {
     modal.style.display = "none";
     editBook();
+    console.log(editID)
+    
   }
 }
 
@@ -145,15 +148,15 @@ document.getElementById("published").value = "";
 
 // Transfer information from 'Edit' modal to library array
 function editBook() {
-  library[bookID].title = title.value;
-  library[bookID].author = author.value;
-  library[bookID].pages = pages.value;
-  library[bookID].published = published.value;
+  library[editID].title = title.value;
+  library[editID].author = author.value;
+  library[editID].pages = pages.value;
+  library[editID].published = published.value;
   if (read.checked == true) {
-    library[bookID].read = 'on';
+    library[editID].read = 'on';
   }
   else {
-    library[bookID].read = 'off';
+    library[editID].read = 'off';
   }
 }
 
@@ -237,7 +240,11 @@ function displayLibrary() {
     }
 
 card.addEventListener("click", function() {
+  editID = library[card.id].id;
+  cardEditModal();
+});
 
+function cardEditModal() {
   modal.style.display = "block";
   const editTitle = document.getElementById("editTitle");
   editTitle.innerHTML = "Edit Book";
@@ -253,8 +260,8 @@ card.addEventListener("click", function() {
   else {
     readField.checked = false;
   }
-});
-    
+}
+
 // For loop determines if a staging area is empty, then places the card there with appendChild 
 let medium = document.getElementById("medium");
 let long = document.getElementById("long");
